@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(0, 120, 215);
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            /* font-family: Arial, sans-serif; */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height:100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+            
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none;
+            color: rgb(71, 71, 71);
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+            /*background: linear-gradient(to left, rgba(var(--light), 0.1), rgba(var(--light), 0.2)); */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Recombinant Protein</h1>
+    <h2> Suitable Scenarios: </h2>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange <span class="chevron down">&#8250;</span></h2>
+            <ul id="anion-exchange" class="scenarios" style="display: block;">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-hc60-deae-excel" target="_top">Weak AEX, Good Alkali Resistance, Quick PH Balance, Intermediate or Polishing</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">Excellent Alkali Resistance, Low Back Pressure, High Recovery</a></li>
+                
+<li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por50-hq" target="_top">Good Salt Resistance, High Resolution, Intermediate or Polishing</a></li>
+            </ul>
+        </div>
+        <hr>
+
+       <div class="subcategory">
+            <h2 onclick="toggleScenarios('cation-exchange')">Cation Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="cation-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-sp" target="_top">High DBC, Capture, Good Salt Resistance</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por50-hs" target="_top">Big Pore Size, High Resolution, Intermediate or Polishing</a></li>
+        <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-sp" target="_top">High Resolution, Good DBC, Intermediate or Polishing</a></li>
+            </ul>
+        </div>
+             <hr>
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('mix-mode-cation-exchange')">Mix-Mode Cation Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="mix-mode-cation-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-mmc" target="_top">When Conventional Cation Exchange Not Applicable</a></li>
+            </ul>
+        </div>
+        <hr>
+ <div class="subcategory">
+            <h2 onclick="toggleScenarios('mix-mode-anion-exchange')">Mix-Mode Anion Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="mix-mode-anion-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-mma" target="_top">When Conventional Anion Exchange Not Applicable</a></li>
+            </ul>
+        </div>
+        <hr>
+
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('hydrophobic-interaction')">Hydrophobic Interaction <span class="chevron">&#8250;</span></h2>
+            <ul id="hydrophobic-interaction" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mc60-hic-phenyl" target="_top">Sample with Low Hydrophobicity</a></li>
+        <li><a href="https://sepax-bio.com/all-products/ols/products/polar-mc60-hic-phenyl" target="_top">Sample with High Hydrophobicity</a></li>
+            </ul>
+        </div>
+<hr>
+
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('ni-affinity')">Ni-Affinity (HIS-tag protein) <span class="chevron">&#8250;</span></h2>
+            <ul id="ni-affinity" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-nta-ni" target="_top">High DBC, High purity, No Chelating or Reducing Agents in Sample
+</a></li>
+        <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-ni-excel" target="_top">Sample with Chelating or Reducing Agents, Use NaOH for CIP, When Ni Regeneration Not Accepted</a></li>
+            </ul>
+        </div>
+<hr>
+
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('boronate-affinity')">Boronate-Affinity <span class="chevron">&#8250;</span></h2>
+            <ul id="boronate-affinity" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-hc60-boronate" target="_top">Remove Glycoprotein</a></li>
+            </ul>
+        </div>
+<hr>
+    </div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1053434168" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
+<style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            
+        }
+        .product-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            padding:2px;
+        }
+    </style>
+</head>
+<body>
+
+    <p id="debugBox">
+        code
+    </p>
+
+</body>
+<script>
+    const url = window.top.location.href;
+
+    // const url = 'https://sepax-bio.com/contact?productName="product name"&quantity=2&importance=high'
+
+    const args = url.split(/[?&]/).slice(1)
+
+    const argObj = {};
+
+    args.forEach(arg => {
+        const key = arg.split('=')[0];
+        const value = decodeURIComponent(arg.split('=')[1].replace(/"/g, '')).replace(/["=]/g,'');
+        argObj[key] = value;
+    });
+
+    document.getElementById('debugBox').textContent = "{" + Object.entries(argObj).map(([key, value]) => `${key}: ${value}`).join(', ') + "}";
+
+
+    const productname = argObj.hasOwnProperty('productName') ? '(' + argObj.productName + ') ' : '';
+
+    const body = `Make sure to mention your desired product ${productname}in your message.`;
+
+    //I have become godaddy, destoyer of websites
+    const selected = Array.from(window.top.document.querySelectorAll(
+        'span[data-text="true"], h4'
+    )).find(span => span.textContent.includes('Make sure to'));
+
+    selected.textContent = body;
+
+</script>
+</html>

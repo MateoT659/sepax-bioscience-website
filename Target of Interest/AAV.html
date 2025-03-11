@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(39, 101, 105); /* Existing teal-ish color */
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height: 100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none; /* No underline by default */
+            color: rgb(71, 71, 71); /* Default gray color */
+            font-style: italic;
+            transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for hover */
+        }
+        .scenarios a:hover {
+            color: #ff4500; /* Orange-red on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.3s ease; /* Smooth chevron rotation */
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color: gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>AAV</h1>
+        <h2>Suitable Scenarios:</h2>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('core-shell-mix-mode')">Core-Shell Mix-Mode <span class="chevron down">›</span></h2>
+            <ul id="core-shell-mix-mode" class="scenarios" style="display: block;">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-core-500" target="_top">AAV Crude Purification</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange <span class="chevron">›</span></h2>
+            <ul id="anion-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/strong-anion-exchange-hrq" target="_top">High Resolution: AAV polishing, Separation for Empty/Solid Capsids</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por50-hq" target="_top">AAV Polishing, Separation for Empty/Solid Capsids</a></li>
+            </ul>
+        </div>
+        <hr>
+    </div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1325173791" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

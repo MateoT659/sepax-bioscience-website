@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
+<style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- <p id="debugBox">
+        code
+    </p> -->
+</body>
+
+<script>
+    function setToInquire(button){
+        //sets the button to "inquire" mode
+        const productName = window.top.document.querySelector(
+            'h1[data-aid="PRODUCT_NAME_RENDERED"]'
+        ).textContent;
+
+        button.textContent = ' Inquire ';
+        button.style.backgroundColor = '#008080';
+        button.setAttribute('onclick', "location.href='https://sepax-bio.com/inquire?productName="+productName+"'");
+        
+    }
+
+    function setToCart(button){
+        //sets the button to "cart" mode
+        button.textContent = ' Add to Cart ';
+        button.style.backgroundColor = 'black';
+        button.removeAttribute('onclick');
+        
+    }
+
+    window.top.document.addEventListener('click', ()=>{
+        //click listener for the page
+        
+        //find all sizeboxes
+        const sizes = window.top.document.querySelectorAll(
+            'div[data-ux="Block"] > p[data-ux="Details"]'
+        );
+        
+        const desc = window.top.document.querySelector('div[data-aid="PRODUCT_DESCRIPTION_RENDERED"]');
+
+        if (desc !== null){
+            desc.style.display = 'none';
+        }
+
+        //find enabled sizebox and determine size
+        const selected = Array.from(sizes).find(size => size.hasAttribute('disabled') === false);
+        if (selected == null){
+            return;
+        }
+        
+        const sizeText = selected.textContent;
+        //in mL:
+        const sizeValue = sizeText.endsWith('mL') ? parseFloat(sizeText) : parseFloat(sizeText)* 1000;
+
+        //find the button
+        let button = window.top.document.getElementById('addtocart-btn-0');
+        for(let i=1; i<400 && button == null; i++){
+            button = window.top.document.getElementById('addtocart-btn-'+i);
+        }
+
+        if (button == null){
+            //button not found
+            return;
+        }
+
+
+        window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
+
+        let inquireButton = window.top.document.getElementById('inquire-btn');
+
+        if (inquireButton === null){
+            inquireButton = button.cloneNode(true);
+            inquireButton.id = 'inquire-btn';
+            button.parentNode.appendChild(inquireButton);
+            setToInquire(inquireButton);
+        }
+
+        //set button to inquire or cart based on size (in mL)
+        if (sizeValue<=5){
+            //TO CART BUTTON
+
+            inquireButton.style.display = 'none';
+            button.style.display = 'block';
+
+            window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
+                price => {
+                    price.parentNode.style.display = 'block';
+                }
+            )
+        } else {
+            //TO INQUIRE BUTTON
+
+            inquireButton.style.display = 'block';
+            button.style.display = 'none';
+            window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
+                price => {
+                    price.parentNode.style.display = 'none';
+                }
+            )
+        }
+    });
+
+    
+    //DEBUGGING
+    // document.getElementById('debugBox').addEventListener('click', ()=>{
+        
+    //     let button = window.top.document.getElementById('addtocart-btn-0');
+    //     for(let i=1; i<400 && button == null; i++){
+    //         button = window.top.document.getElementById('addtocart-btn-'+i);
+    //     }
+
+    //     if (button == null){
+    //         //button not found
+    //         return;
+    //     }
+
+    //     const state = button.textContent;
+    //     if (state === 'Inquire'){
+    //         setToCart(button);
+    //     } else {
+    //         setToInquire(button);
+    //     }
+    // });
+
+</script>
+
+</html>

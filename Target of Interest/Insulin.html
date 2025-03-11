@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(218, 165, 32);
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            /* font-family: Arial, sans-serif; */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height:100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+            
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none;
+            color: rgb(71, 71, 71);
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+            /*background: linear-gradient(to left, rgba(var(--light), 0.1), rgba(var(--light), 0.2)); */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Insulin, GLP-1, and Peptides</h1>
+<h2> Suitable Scenarios: </h2>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange <span class="chevron down">&#8250;</span></h2>
+            <ul id="anion-exchange" class="scenarios" style="display: block;">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">Excellent Alkali Resistance, Low Back Pressure, High Recovery</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por15-q" target="_top">Ultra High Resolution, Good Resistance to Pressure</a></li>
+            </ul>
+        </div>
+        <hr>
+
+       <div class="subcategory">
+            <h2 onclick="toggleScenarios('cation-exchange')">Cation Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="cation-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-hc60-sp" target="_top">High DBC, Capture</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-sp" target="_top">High Resolution, Intermediate Purification</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por15-s" target="_top">Ultra High Resolution, Good Resistance to Pressure</a></li>
+            </ul>
+        </div>
+        <hr>
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('reversed-phase')">Reversed Phase <span class="chevron">&#8250;</span></h2>
+            <ul id="reversed-phase" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/bio-c82" target="_top">GLP-1, Insulin (10µm, 200Å)</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/bio-c82" target="_top">Insulin (8µm, 100Å)</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/bio-c18" target="_top">Stronger binding force than C8, For peptides with less binding </a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/br-c18" target="_top">Good Alkali Resistance (pH 5-11)</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/polyrp" target="_top">Long Life Time, Polymer Matrix</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('hydrophobic-interaction')">Hydrophobic Interaction <span class="chevron">&#8250;</span></h2>
+            <ul id="hydrophobic-interaction" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/generik-mc30-hic-butyl" target="_top">Capture or Intermediate Purification</a></li>
+            </ul>
+        </div>
+<hr>
+    </div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1763034698" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(70, 130, 180); /* Existing steel blue color */
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height: 100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+        }
+        .scenarios {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none; /* No underline by default */
+            color: rgb(71, 71, 71); /* Default gray color */
+            font-style: italic;
+            transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition for hover */
+        }
+        .scenarios a:hover {
+            color: #ff4500; /* Orange-red on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s ease; /* Smooth chevron rotation */
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color: gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Plasmid</h1>
+        <h2>Suitable Scenarios:</h2>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('mix-mode')">Mix-Mode <span class="chevron down">›</span></h2>
+            <ul id="mix-mode" class="scenarios" style="max-height: 100px;">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-core-1000" target="_top">Capture, Flow-Through Mode</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('hydrophobic-interaction')">Hydrophobic Interaction <span class="chevron">›</span></h2>
+            <ul id="hydrophobic-interaction" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/generik-mc30-hic-butyl" target="_top">Generik: Polishing, Remove Linearized and Nicked Plasmid</a></li>    
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mc30-hic-butyl" target="_top">Monomix: Polishing, Remove Linearized and Nicked Plasmid</a></li>        
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange <span class="chevron">›</span></h2>
+            <ul id="anion-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-hc60-deae-excel" target="_top">Tentacle AEX, Capture, Remove RNA</a></li>        
+            </ul>
+        </div>
+        <hr>
+    </div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1168961391" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.maxHeight === "0px" || scenarios.style.maxHeight === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.maxHeight = "0px";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.maxHeight = scenarios.scrollHeight + "px";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.maxHeight = "0px";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

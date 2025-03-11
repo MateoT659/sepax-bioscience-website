@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(150, 30, 50);
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            /* font-family: Arial, sans-serif; */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height:100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+            
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none;
+            color: rgb(71, 71, 71);
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+            /*background: linear-gradient(to left, rgba(var(--light), 0.1), rgba(var(--light), 0.2)); */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Virus and Vaccine Scenarios</h1>
+    <h2> Suitable Scenarios: </h2>
+        <hr>
+
+
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange<span class="chevron">&#8250;</span></h2>
+            <ul id="anion-exchange" class="scenarios" style="display: block;">
+        
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">High Resolution, Good HCP Removal Capacity, Polymer Matrix </a></li>
+        <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por50-hq" target="_top">Larger Pore Size, Good HCP Removal Capacity, Polymer Matrix</a></li>
+        <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por30-q" target="_top">Virus Vectors Polishing</a></li>
+            </ul>
+        </div>
+   <hr>
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('core-shell-mix-mode')">Core-Shell Mix-Mode <span class="chevron down">&#8250;</span></h2>
+            <ul id="core-shell-mix-mode" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-core-500" target="_top">AAV, Hepatitis B Virus, Adenovirus, VLP, Small Size Virus, Flow-Through Mode</a></li>
+<li><a href="https://sepax-bio.com/all-products/ols/products/monomix-core-1000" target="_top">Chickenpox Virus, Rabies Virus, Large Size Virus, Flow-Through Mode</a></li>
+            </ul>
+        </div>
+<hr>
+</div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1308624310" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

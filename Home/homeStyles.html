@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    
+
+    .leading-dots {
+            color: #000;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    }
+    .leading-dots p {
+        height:0px;
+    }
+    .leading-dots p:nth-child(2) strong {
+        animation-delay: 0.3s;
+    }
+    .leading-dots p:nth-child(3) strong {
+        animation-delay: 0.6s;
+    }
+    .leading-dots p:nth-child(4) strong {
+        animation-delay: 0.9s;
+    }
+    .leading-dots p:nth-child(5) strong {
+        animation-delay: 1.2s;
+    }
+    .leading-dots p strong {
+        height: 1px;
+        font-size:35px;
+        animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+    /* 
+    
+    .fade-in-up-pre {
+        opacity:0;
+        transform: translateY(70px);
+    }
+
+    .fade-in-up {
+        animation: fadeIn 2s, moveUp 2s;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        10% {
+            opacity: 0;
+        }
+        75% {
+            opacity: 1;
+        }
+    }
+    @keyframes moveUp {
+        0% {
+            transform: translateY(70px);
+        }
+        10% {
+            transform: translateY(70px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    } */
+
+
+   
+</style>
+<body>
+    <div class="leading-dots" id="leading-dots-resin">
+        <p><strong>.</strong></p>
+        <p><strong>.</strong></p>
+        <p><strong>.</strong></p>
+        <p><strong>.</strong></p>
+        <p><strong>.</strong></p>
+    </div>
+
+    <!-- <body>
+        <div class="leading-dots" id="leading-dots-resin">
+            <p><strong>●</strong></p>
+            <p><strong>●</strong></p>
+            <p><strong>●</strong></p>
+            <p><strong>●</strong></p>
+            <p><strong>●</strong></p>
+        </div> -->
+
+    <!-- <button onclick="printChild()">debugButton</button>
+    <div id = 'debug'><p>debug</p></div> -->
+</body>  
+<script>
+    const debug = false;
+    const doc = debug ? document : window.top.document;
+
+    function applyStyle(element, style) {
+        for (const key in style) {
+            element.style[key] = style[key];
+        }
+    }
+
+    function applyClass(element, className) {
+        element.classList.add(className);
+    }
+
+    function removeClass(element, className) {
+        element.classList.remove(className);
+    }
+
+    function addFadeInUp(element) {
+        applyClass(element, 'fade-in-up-pre');
+        observerFadeInUp.observe(element);
+    }
+
+    function addFadeIn(element) {
+        applyClass(element, 'fade-in-pre');
+        observerFadeIn.observe(element);
+    }
+
+    doc.styleSheets[0].insertRule('.fade-in-up-pre {opacity:0; transform: translateY(70px);}', 0);
+    doc.styleSheets[0].insertRule('.fade-in-up {animation: fadeIn 2s, moveUp 2s;}', 0);
+    doc.styleSheets[0].insertRule('.fade-in-pre {opacity:0;}', 0);
+    doc.styleSheets[0].insertRule('.fade-in {animation: fadeIn 2s;}', 0);
+    doc.styleSheets[0].insertRule('@keyframes fadeIn {0% {opacity: 0;} 10% {opacity: 0;} 75% {opacity: 1;}}', 0);
+    doc.styleSheets[0].insertRule('@keyframes moveUp {0% {transform: translateY(70px);} 10% {transform: translateY(70px);} 100% {transform: translateY(0);}}', 0);
+
+
+    const observerFadeIn = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                applyClass(entry.target, 'fade-in');
+                removeClass(entry.target, 'fade-in-pre');
+            }
+        });
+    });
+
+    const observerFadeInUp = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                applyClass(entry.target, 'fade-in-up');
+                removeClass(entry.target, 'fade-in-up-pre');
+            }
+        });
+    });
+
+    // const things = doc.querySelectorAll('label')
+    // things.forEach(thing => {
+    //     addFadeInUp(thing);
+    // });
+
+
+
+    // FIX HEADER HEIGHT
+    doc.querySelector('section[data-aid="HEADER_SECTION"]').style.height = '100vh';
+    doc.querySelector('section[data-aid="HEADER_SECTION"]>div').style.height = '100vh';
+    doc.querySelector('section[data-aid="HEADER_SECTION"]>div>div[role="img"]').style.height = '100vh';
+
+    // CHANGE HEADER IMAGE COLOR (SELECT ALL OF THEM THERE'S MORE THAN ONE FOR WHATEVER GOD FORSAKEN REASON)
+    
+    doc.styleSheets[0].insertRule('.white {filter: brightness(0) invert(1);}', 0);
+    doc.styleSheets[0].insertRule('.color {filter: brightness(1);}', 0);
+
+    const img = doc.querySelectorAll('img[data-aid="HEADER_LOGO_IMAGE_RENDERED"]');
+
+    img.forEach(i => {
+        applyClass(i, 'white');
+    });
+
+    doc.addEventListener('scroll', () => {
+        setTimeout(() => {
+            const img = doc.querySelectorAll('img[data-aid="HEADER_LOGO_IMAGE_RENDERED"]');
+
+            img.forEach(i => {
+            if (i.style.maxHeight == '58px') {
+                //white when above the top
+                i.style.transition = 'filter 0.5s';
+                removeClass(i, 'color');
+                applyClass(i, 'white');
+            }
+            else {
+                //black when below the top
+                i.style.transition = 'filter 0.5s';
+                removeClass(i, 'white');
+                applyClass(i, 'color');
+            }
+            });
+        }, 100); 
+    });
+
+    //OPENING ANIMATION
+
+    doc.styleSheets[0].insertRule('.leading-dots {color: #FFFFFF; display: flex; flex-direction: column; align-items: center;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p {height:1px;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(2) strong {animation-delay: 0.3s;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(3) strong {animation-delay: 0.6s;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(4) strong {animation-delay: 0.9s;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(5) strong {animation-delay: 1.2s;}', 0);
+    doc.styleSheets[0].insertRule('.leading-dots p strong {font-weight: 700; opacity:0; font-size: 30px; animation: blink 2s infinite; height:1px;}', 0);
+    doc.styleSheets[0].insertRule('@keyframes blink {0%, 100% {opacity: 0;} 50% {opacity: 1;}}', 0);
+
+    const tagline = doc.querySelector('h1[data-aid="HEADER_TAGLINE_RENDERED"]');
+    const headerDiv = tagline.parentElement.parentElement.parentElement.parentElement.parentElement;
+    
+    const child = document.getElementById('leading-dots-resin')
+    applyClass(tagline, 'fade-in-pre');
+    applyClass(child, 'fade-in-pre');
+
+    setTimeout(() => {
+        addFadeIn(tagline)
+        removeClass(tagline, 'fade-in-pre');
+    }, 500);
+
+    child.style.position = 'absolute';
+    child.style.bottom = '45px';
+    headerDiv.appendChild(child);
+    setTimeout(() => {
+        addFadeIn(child)
+    }, 1500);
+    
+</script>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(128, 0, 128);
+
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            /* font-family: Arial, sans-serif; */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height:100%;
+        }
+        h1 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+            
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none;
+            color: rgb(71, 71, 71);
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+            /*background: linear-gradient(to left, rgba(var(--light), 0.1), rgba(var(--light), 0.2)); */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:purple;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>mRNA</h1>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('affinity')">Affinity <span class="chevron down">&#8250;</span></h2>
+            <ul id="affinity" class="scenarios" style="display: block;">
+                <h3> Suitable Scenarios: </h3>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/proteomix-por50-dt20" target="_top">With Poly A Tail</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('reversed-phase')">Reversed Phase <span class="chevron">&#8250;</span></h2>
+            <ul id="reversed-phase" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/bio-c18" target="_top">Reverse phase, High resolution </a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('size-exclusion')">Size Exclusion <span class="chevron">&#8250;</span></h2>
+            <ul id="size-exclusion" class="scenarios">
+                <li><a href="product-page-6.html" target="_top">Separate CircRNA aggregates & monomer</a></li>
+            </ul>
+        </div>
+        <hr>
+</div>
+    <div class="image-container">
+        <img id="main-image" src="https://media.gettyimages.com/id/1355122387/photo/ribonucleic-acid-strands-consisting-of-nucleotides-3d-illustration.webp?b=1&s=612x612&w=0&k=20&c=-1bn8Rc59akEdNTQZ8d4Fgm4gfIxqLUcyATt6PT88g0=" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

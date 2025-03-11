@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibody Information</title>
+    <style>
+        :root {
+            --lightColor: rgb(39, 101, 105);
+        }
+        body {
+            display: flex;
+            margin: 0;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            /* font-family: Arial, sans-serif; */
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            max-width: 70%;
+            overflow-y: auto;
+        }
+        .image-container {
+            position: sticky;
+            top: 0;
+            right: 0;
+            width: 50%; 
+            height: 600px;
+            overflow: hidden;
+            pointer-events: none; 
+        }
+        .image-container img {
+            max-height:100%;
+        }
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: var(--lightColor);
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subcategory {
+            margin-bottom: 20px;
+        }
+        .subcategory h2 {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 400;
+            color: var(--lightColor);
+            
+        }
+        .scenarios {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+        }
+        .scenarios a {
+            text-decoration: none;
+            color: rgb(71, 71, 71);
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .scenarios li {
+            white-space: normal; 
+            word-break: break-word;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            border-left: 2px solid var(--lightColor);
+            /*background: linear-gradient(to left, rgba(var(--light), 0.1), rgba(var(--light), 0.2)); */
+        }
+        hr {
+            border: none;
+            border-top: 1px solid lightgray;
+            margin: 10px 0;
+        }
+        .chevron {
+            transition: transform 0.2s;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            color:gray;
+        }
+        .chevron.down {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Antibody</h1>
+	<h2>Suitable Scenarios:</h2>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('affinity')">Affinity <span class="chevron down">&#8250;</span></h2>
+            <ul id="affinity" class="scenarios" style="display: block;">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/mabpurix-a65-excel" target="_top">Monoclonal Antibody (mAb)</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/mabpurix-p45" target="_top">Bispecific Antibody (BsAb),<br> Polyclonal Antibody, <br>Fc Fusion Protein (MW > 200kDa)</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/mabpurix-a65-excel" target="_top">Bispecific Antibody (BsAb), <br> Polyclonal Antibody, <br> Fc Fusion Protein (MW ~ 150kDa, similar structure to IgG)</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('anion-exchange')">Anion Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="anion-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">Monoclonal Antibody, Bispecific Antibody</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('cation-exchange')">Cation Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="cation-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-sp" target="_top">Monoclonal Antibody, Bispecific Antibody</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('hydrophobic-interaction')">Hydrophobic Interaction <span class="chevron">&#8250;</span></h2>
+            <ul id="hydrophobic-interaction" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mc60-hic-phenyl" target="_top">Monomix: Bispecific antibody, Polyclonal Antibody, Fc Fusion Protein</a></li>
+                <li><a href="https://sepax-bio.com/all-products/ols/products/polar-mc60-hic-phenyl" target="_top">Polar: Bispecific Antibody, Polyclonal Antibody, Fc Fusion Protein</a></li>
+            </ul>
+        </div>
+        <hr>
+
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('mix-mode-anion-exchange')">Mix-Mode Anion Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="mix-mode-anion-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-mma" target="_top">Bispecific Antibody (BaAb), Polyclonal Antibody (when conventional anion exchange not applicable)</a></li>
+            </ul>
+        </div>
+        <hr>
+        <div class="subcategory">
+            <h2 onclick="toggleScenarios('mix-mode-cation-exchange')">Mix-Mode Cation Exchange <span class="chevron">&#8250;</span></h2>
+            <ul id="mix-mode-cation-exchange" class="scenarios">
+                <li><a href="https://sepax-bio.com/all-products/ols/products/agarosix-mc90-mmc" target="_top">Bispecific Antibody (BaAb), Polyclonal Antibody (when conventional cation exchange not applicable)</a></li>
+            </ul>
+        </div>
+        <hr>
+</a></li>
+            </ul>
+        </div>
+        <hr>
+
+    </div>
+    <div class="image-container">
+        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1213545891" alt="Landscape Image">
+    </div>
+
+    <script>
+        function toggleScenarios(id) {
+            const scenarios = document.getElementById(id);
+            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+
+            if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                // Hide all scenario lists except the first one
+                document.querySelectorAll(".scenarios").forEach((el, index) => {
+                    el.style.display = "none";
+                });
+                document.querySelectorAll(".chevron").forEach((el, index) => {
+                    el.classList.remove('down');
+                });
+                scenarios.style.display = "block";
+                chevron.classList.add('down');
+            } else {
+                scenarios.style.display = "none";
+                chevron.classList.remove('down');
+            }
+        }
+    </script>
+</body>
+</html>

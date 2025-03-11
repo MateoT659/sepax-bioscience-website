@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>   
+    <title>Product Display</title>
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: "Lora", serif;
+            color: #2c2c2c;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: "Poppins", serif;
+            font-size: 52px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 20px 0 10px;
+        }
+
+         h2 {
+           font-family: "Poppins", serif;
+           font-size: 26px;
+           font-weight: 400;
+           font-style: italic;
+           color: #555;
+           margin-bottom: 15px;
+         }
+     
+         p {
+           font-family: "Poppins", serif;
+           font-size: 18px;
+           line-height: 1.6;
+           max-width: 700px;
+           margin: 0 auto;
+           color: #444;
+         }
+        .product-container{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 100%;
+            overflow: hidden;
+            flex-wrap:wrap;
+            width:90%;
+            padding-bottom: 100px;
+        }
+        .product-row {
+            display: flex;
+            
+            justify-content: center;
+            flex-wrap: nowrap;
+            padding: 2px;
+        }
+        .product {
+            display: flex;
+            flex: 1;
+            position: relative;
+            text-align: center;
+
+            overflow: hidden;
+            width:25%;
+            min-width: 25%;
+            max-width: 25%;
+            aspect-ratio: 1;
+            background-color: black;
+        }
+        .product img {
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            opacity: 85%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .product-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease-in-out;
+            color: white;
+            font-size: calc(2.5vw);
+            background: rgba(0, 0, 0, 0);
+            text-shadow: 0px 0px 10px black;
+            padding: 1px;
+            pointer-events: none;
+            font-family: Poppins;
+            line-height: 1;
+        }
+        .product img:hover + .product-title {
+            transform: scale(1.2) translate(-41%, -41%);
+            
+        }
+        .product img:hover {
+            transform: scale(1);
+            opacity: 0.50;
+            z-index: 10;
+        }
+        .fade-in-up-pre {
+            opacity:0;
+            transform: translateY(70px);
+        }
+        .fade-in-up {
+            animation: fadeIn 2s, moveUp 2s;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 0;
+            }
+            75% {
+                opacity: 1;
+            }
+        }
+        @keyframes moveUp {
+            0% {
+                transform: translateY(70px);
+            }
+            10% {
+                transform: translateY(70px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        function redirectTo(url) {
+            window.top.location.href = url;
+        }
+
+    </script>
+</head>
+<body>
+<div id="text" class = 'fade-in-up-pre'>
+<h1> PURIFICATION FOR PRECISION</h1>
+    <h2>Unlock the Full Potential of Your Biomolecules</h2>
+    <p>Enable the separation and refinement of diverse biomolecules, supporting the development of cutting-edge therapeutics and bioprocessing innovations. Elevate your research and manufacturing with resins engineered for precision, efficiency, and scalability.</p>
+</div>
+<br/>
+<div class = 'fade-in-up-pre' id = 'buttons'>
+    <div class="product-container">
+        <div class="product">
+           <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/antibody')">
+                <img src="https://thumbs.dreamstime.com/b/abstract-background-swirling-liquid-colors-teal-brown-gold-tones-resembling-ocean-waves-abstract-background-swirling-327420808.jpg" alt="Antibody">
+                <div class="product-title">Antibody</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/plasmid')">
+                <img src="https://img.freepik.com/premium-photo/abstract-blue-yellow-molecules-against-pharmaceuticalthemed-backdrop-concept-pharmaceutical-science-molecular-composition-abstract-art-creative-photography_918839-240969.jpg" alt="Plasmid">
+                <div class="product-title">Plasmid</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/mrna')">
+                <img src="https://thumbs.dreamstime.com/b/swirling-galaxy-glowing-particles-creating-colorful-nebula-abstract-perfect-space-science-fantasy-themed-projects-352004760.jpg" alt="mRNA">
+                <div class="product-title">mRNA</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/insulin')">
+                <img src="https://as2.ftcdn.net/v2/jpg/04/96/33/29/1000_F_496332903_NTpIbjxJD2nQqbt80d5cSZOtu0BBJZBe.jpg" alt="insulin">
+                <div class="product-title">Insulin, GLP-1, Peptides</div>
+            </a>
+        </div>
+
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/aav')">
+                <img src="https://img.freepik.com/premium-photo/abstract-green-gold-swirling-light-vortex-background-futuristic-technology-science-space_1352795-973.jpg" alt="AAV">
+                <div class="product-title">AAV</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/recombinant-protein')">
+                <img src="https://t3.ftcdn.net/jpg/07/66/09/76/360_F_766097610_l78bJufWGUazsvdJ9OuDpoMURM4ytWSx.jpg" alt="Recombinant Protein">
+                <div class="product-title">Recombinant Protein</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/oligo-nucleotides')">
+                <img src="https://thumbs.dreamstime.com/b/neon-abstract-science-background-interconnected-cells-spheres-blue-purple-337365342.jpg" alt="Oligo Nucleotides">
+                <div class="product-title">Oligo Nucleotides</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com//virus-%26-vaccine')">
+                <img src="https://media.gettyimages.com/id/1085226188/photo/virus.webp?b=1&s=612x612&w=0&k=20&c=utKydty-kEkpT2uF-6C7RG67YzmoHtqJRtM6efSRBAI=" alt="Virus & Vaccine">
+                <div class="product-title">Virus & Vaccine</div>
+            </a>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                entry.target.classList.remove('fade-in-up-pre');
+            }
+        });
+    });
+
+    document.querySelectorAll('#text, #buttons').forEach((el) => {
+        observer.observe(el);
+    });
+    
+</script>
+</html>

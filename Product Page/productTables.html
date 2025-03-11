@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    :root {
+        --currentURL: '';
+    }
+    body {
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+        text-align: left;
+    }
+    tr:nth-child(even) {
+        background-color: #fafafa;
+    }
+    td:hover {
+        background-color: #eee;
+    }
+</style>
+<body>
+    <table id="specTable">
+        <thead>
+            <tr>
+                <th colspan="2" id="productNameHeader">Specifications:  </th>
+            </tr>
+        </thead>
+        <tbody id="specBody"></tbody>
+            <!-- Dynamic content will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function updateURL() {
+            window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
+            
+            const descOriginal = window.top.document.querySelector('div[data-aid="PRODUCT_DESCRIPTION_RENDERED"]');
+            const desc = descOriginal.cloneNode(true);
+            if(descOriginal.style.display !== 'none'){
+                descOriginal.style.display = 'none';
+                descOriginal.id = 'originalDesc';
+                desc.id = 'newDesc';
+                if(window.top.document.getElementById('newDesc') === null){
+                    const parent = descOriginal.parentElement.parentElement.parentElement.parentElement;
+                    parent.appendChild(desc);
+                }
+            }
+
+            
+            const url = window.top.location.href;
+
+            //only change the url if it has changed
+            if (getComputedStyle(document.documentElement).getPropertyValue('--currentURL') === url) {
+                return;
+            }
+            document.documentElement.style.setProperty('--currentURL', url);
+            
+           
+            // show/hide table based on URL
+            const table = document.getElementById('specTable');
+            if (url.includes('/products/') || url.includes('godaddy')) {
+
+                
+                const oldHeader = document.getElementById('productNameHeader').textContent;
+            
+                table.style.display = 'table';
+
+                //reset the table
+                document.getElementById('productNameHeader').textContent = "Specifications: ";
+                document.getElementById('specBody').innerHTML = "";
+                
+                //predefined specs for each product, keyed by url tag (godaddy->products->searchengine)
+                const specs = {
+                    "mabpurix-a65": {
+                        productName: "MabPurix A65",
+                        specs: [
+                            { key: "Matrix", value: "Highly cross-linked agarose microspheres" },
+                            { key: "Ligand", value: "Alkaline resistant recombinant protein A" },
+                            { key: "Ligand Covalent Bonding", value: "Thioether bond" },
+                            { key: "Average Particle Size", value: "65 to 75 μm" },
+                            { key: "Dynamic Binding Capacity", value: "≥ 70 mg Human IgG/mL resin (6 min residence time)" },
+                            { key: "Operating Pressure", value: "≤0.3 MPa (3 bar)" },
+                            { key: "Flow Rate", value: "500 cm/hr (operating pressure 2 bar)" },
+                            { key: "pH Stability (operation)", value: "12-Mar" },
+                            { key: "pH Stability (CIP)", value: "2-13.7" },
+                            { key: "CIP", value: "0.1-0.5 M NaOH" },
+                            { key: "Operating Temperature", value: "10-30 ℃, avoid freezing" },
+                            { key: "Packaging Size", value: "5ml prepacked column, 1 L, 5 L, 10 L, 50 L. Customized size upon request." },
+                            { key: "Typical Applications", value: "Antibodies, Fc fusion proteins, ADC" }
+                        ]
+                    },
+                    "mabpurix-a65-excel":{
+                        productName: "MabPurix A65 Excel",
+                        specs: [
+                            { key: "Matrix", value: "Highly cross-linked agarose microspheres" },
+                            { key: "Ligand", value: "Alkaline resistant recombinant protein A" },
+                            { key: "Ligand Covalent Bonding", value: "Thioether bond" },
+                            { key: "Average Particle Size", value: "65 to 75 μm" },
+                            { key: "Dynamic Binding Capacity", value: "≥ 70 mg Human IgG/mL resin (6 min residence time)" },
+                            { key: "Operating Pressure", value: "≤0.3 MPa (3 bar)" },
+                            { key: "Flow Rate", value: "500 cm/hr (operating pressure 2 bar)" },
+                            { key: "pH Stability (operation)", value: "12-Mar" },
+                            { key: "pH Stability (CIP)", value: "2-13.7" },
+                            { key: "CIP", value: "0.1-0.5 M NaOH" },
+                            { key: "Operating Temperature", value: "10-30 ℃, avoid freezing" },
+                            { key: "Packaging Size", value: "5ml prepacked column, 1 L, 5 L, 10 L, 50 L. Customized size upon request." },
+                            { key: "Typical Applications", value: "Antibodies, Fc fusion proteins, ADC" }
+                        ]
+                    },
+                    "mabpurix-p45": { 
+                        productName: "MabPurix P45", 
+                        specs: [
+                            { key: "Matrix", value: "Hydrophilic polymethacrylate microspheres" },
+                            { key: "Ligand", value: "Alkaline resistant recombinant protein A" },
+                            { key: "Ligand Covalent Bonding", value: "Thioether bond" },
+                            { key: "Average Particle Size*", value: "~45 μm" },
+                            { key: "Dynamic Binding Capacity*", value: "~55 mg Human IgG/mL resin (6-minute residence time)" },
+                            { key: "Operating Pressure", value: "≤1 MPa (10 bar)" },
+                            { key: "Flow Rate*", value: "800 cm/hr (operating pressure ≤ 3 bar)" },
+                            { key: "pH Stability (operation)", value: "3-12" },
+                            { key: "pH Stability (CIP)", value: "2-13.7" },
+                            { key: "CIP", value: "0.1-0.5 M NaOH" },
+                            { key: "Operating Temperature", value: "10-30 °C, avoid freezing" },
+                            { key: "Mobile Phase Compatibility*", value: "All commonly used buffers such as phosphoric acid and acetic acid. Other reagents: 6.0 M guanidine hydrochloride, 20% ethanol, 2% benzyl alcohol, 1% Tween20, 1M citric acid, 1M acetic acid, etc." },
+                            { key: "Storage Conditions", value: "2-8 °C, in 20% ethanol or 2% benzyl alcohol" },
+                            { key: "Transportation Requirements", value: "2-8 °C, in 20% ethanol or 2% benzyl alcohol" },
+                            { key: "Typical Applications", value: "Antibodies, Fc Fusion Proteins, ADC" }
+                        ]
+                    },
+                    "proteomix-por50-dt20": { 
+                        productName: "Proteomix POR50-dT20", 
+                        specs: [
+                            { key: "Types of ligands", value: "mRNA affinity" },
+                            { key: "Functional Group", value: "-dT20" },
+                            { key: "Average Particle Size", value: "44.0±6.0" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "800 cm/hr (operating pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥ 0.75 mg Oligo A40" },
+                            { key: "pH Stability (operation)", value: "2-12" },
+                            { key: "pH Stability (CIP)", value: "2-13.7" },
+                            { key: "Working Temperature", value: "2-65 °C, avoid freezing" },
+                            { key: "Working Pressure", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical Stability*", value: "Common reagents: Water, 0.5 M NaOH, 0.5% SDS, 20 mM EDTA, 5 mM dTT, 2 M MgCl2, and other conventional reagents; Avoid using reagents: Strong oxidizers (e.g., hypochlorite), oxidizing acids (e.g., nitric acid), strong reductants (e.g., sulfites), acetone, tetrahydrofuran, or benzyl alcohol." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Capture and purification of mRNA samples with PolyA tail end" }
+                        ] 
+                    },
+                    "monomix-dt20": { productName: "Monomix dT20", specs: [] },
+                    "agarosix-mc90-nta-ni": { 
+                        productName: "Agarosix MC90-NTA Ni", 
+                        specs: [
+                            { key: "Matrix", value: "6% Highly Cross-Linked Agarose" },
+                            { key: "Average Particle Size", value: "90 μm" },
+                            { key: "Coordination Number", value: "4" },
+                            { key: "Metal Ion Loading (/Ml Resin)", value: "15~20 μmol Ni2+" },
+                            { key: "Dynamic Binding Capacity (/Ml Resin)*", value: "≥ 50 mg (His tagged protein)" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "1100 cm/hr (Operating pressure 1.5 bar)" },
+                            { key: "Ph Stability (Operating)", value: "3~12" },
+                            { key: "Ph Stability (CIP)", value: "2~14" },
+                            { key: "Operating Temperature", value: "4~35°C" },
+                            { key: "Pressure Tolerance", value: "≤ 0.3 MPa (3 bar)" },
+                            { key: "Chemical Stability*", value: "Stable at 40°C for 1 week: 10 mM HCl, 0.1 M NaOH, 8 M Urea, 6 M Guanidine Hydrochloride; Stable at 40°C for 12 hours: 1 M NaOH, 70% Acetic Acid" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Storage Conditions", value: "Please refer to '9. Product Storage' for details" }
+                        ] 
+                    },
+                    "agarosix-mc90-ni-excel": { 
+                        productName: "Agarosix MC90-Ni Excel", 
+                        specs: [
+                            { key: "Matrix", value: "6% Highly Cross-Linked Agarose" },
+                            { key: "Average Particle Size", value: "90 μm" },
+                            { key: "Coordination Number", value: "5" },
+                            { key: "Metal Ion Loading (/Ml Resin)", value: "54 ~70 μmol Ni2+" },
+                            { key: "Dynamic Binding Capacity (/Ml Resin)*", value: "≥ 35 mg (His tagged protein)" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "1100 cm/hr (Operating pressure 1.5 bar)" },
+                            { key: "Ph Stability (Operating)", value: "2~12" },
+                            { key: "Ph Stability (CIP)", value: "2~14" },
+                            { key: "Operating Temperature", value: "4~35°C" },
+                            { key: "Pressure Tolerance", value: "≤ 0.3 MPa (3 bar)" },
+                            { key: "Chemical Stability*", value: "Stable at 40°C for 1 week: 10 mM HCl and 10 mM NaOH; Stable at 40°C for 24 hours: 10 mM DTT, 1 M NaOH, 5 mM TCEP, 20 mM β-Mercaptoethanol, 6 M Guanidine Hydrochloride, 500 mM Imidazole, and 10 mM EDTA; Stable at 40°C for 2 hours: 100 mM EDTA" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Storage Conditions", value: "Please refer to '9. Product Storage' for details" }
+                        ] 
+                    },
+                    "monomix-hc60-boronate": { 
+                        productName: "Monomix HC60-Boronate", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Composite anion" },
+                            { key: "Functional Group", value: "Boronate (Phenylboronic Acid)" },
+                            { key: "Average Particle Size", value: "~60 μm" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "10 - 30 μmol Sorbitol" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "600 cm/hr" },
+                            { key: "Dynamic Load Capacity * (/mL Resin)", value: "≥ 30 mg BSA" },
+                            { key: "pH stability (operation)", value: "2 - 13" },
+                            { key: "pH stability (CIP)", value: "1 - 14" },
+                            { key: "Operating Temperature", value: "4-35 °C" },
+                            { key: "Operating Pressure", value: "≤ 1.0 MPa (10 bar)" },
+                            { key: "Chemical Stabilities*", value: "Compatible with water and mixtures containing acetonitrile, acetone, or methanol. Common buffer systems: HEPES, MES, phosphate, acetate buffers, etc." },
+                            { key: "Transportation Conditions", value: "4-35°C, stored in 20% ethanol" },
+                            { key: "Storage Conditions", value: "Refer to 'Section 8: Product Storage'" },
+                            { key: "Typical Applications", value: "Glycoproteins, nucleotides, polysaccharides, etc." }
+                        ] 
+                    },
+                    "monomix-core-500": { 
+                        productName: "Monomix Core 500", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "anion" },
+                            { key: "Functional Group", value: "Hydrophobic, amino" },
+                            { key: "Particle Size (μm)", value: "~60" },
+                            { key: "Average Pore Size", value: "500 Å" },
+                            { key: "Protein Exclusion MW", value: "400 kDa" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "0.1-0.3" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "1000 cm/hr (operating pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "≥ 15 mg BSA" },
+                            { key: "Ph Stability (Operation)", value: "2–14" },
+                            { key: "Working Temperature", value: "4-35 °C, avoid freezing" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (10 bar)" },
+                            { key: "Chemical Stability*", value: "Compatible with conventional buffer salt systems; Other reagents: 1.0 M NaOH, 8.0 M urea, 6.0 M guanidine hydrochloride, DMSO, 0-100% ethanol, acetonitrile, 2.0 M acetic acid, 1.0 M HCl, etc." },
+                            { key: "Storage Conditions", value: "Refer to 'Section 7: Product Storage'" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Application", value: "Plasmids, viruses, vaccines, proteins, nucleic acids" }
+                        ] 
+                    },
+                    'agarosix-hc90-q': { 
+                        productName: 'Agarosix HC90-Q', 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Anion" },
+                            { key: "Matrix", value: "High rigidity agarose containing glucan long chains" },
+                            { key: "Functional group", value: "-N+(CH3)3" },
+                            { key: "Average particle size", value: "~90 μm" },
+                            { key: "Ion exchange capacity (eq/L)", value: "0.06-0.15" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "800 cm/hr (Operating Pressure 3 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥ 120 mg BSA" },
+                            { key: "pH stability (operation)", value: "2 ~ 13" },
+                            { key: "pH stability (CIP)", value: "1 ~ 14" },
+                            { key: "Working Temperature", value: "4 ~ 30°C" },
+                            { key: "Pressure Tolerance", value: "0.5 MPa (5 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with common aqueous buffer systems; Other solvents: 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, and 70% ethanol." },
+                            { key: "Transportation Conditions", value: "4-35°C, stored in 20% ethanol" },
+                            { key: "Storage Conditions", value: "Refer to 'Section 7: Product Storage'" }
+                        ] 
+                    },
+                    "monomix-core-1000": { 
+                        productName: "Monomix Core 1000", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "anion" },
+                            { key: "Functional Group", value: "Hydrophobic, amino" },
+                            { key: "Particle Size (μm)", value: "~60" },
+                            { key: "Average Pore Size", value: "1000 Å" },
+                            { key: "Protein Exclusion MW", value: "700 kDa" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "0.08-0.2" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "1000 cm/hr (operating pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "≥ 15 mg BSA" },
+                            { key: "Ph Stability (Operation)", value: "2–14" },
+                            { key: "Working Temperature", value: "4-35 °C, avoid freezing" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (10 bar)" },
+                            { key: "Chemical Stability*", value: "Compatible with conventional buffer salt systems; Other reagents: 1.0 M NaOH, 8.0 M urea, 6.0 M guanidine hydrochloride, DMSO, 0-100% ethanol, acetonitrile, 2.0 M acetic acid, 1.0 M HCl, etc." },
+                            { key: "Storage Conditions", value: "Refer to 'Section 7: Product Storage'" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Application", value: "Plasmids, viruses, vaccines, proteins, nucleic acids" }
+                        ] 
+                    },
+                    "agarosix-mc90-mma": { 
+                        productName: "Agarosix MC90-MMA", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Composite Anion" },
+                            { key: "Functional Group", value: "Quaternary ammonium salt/phenyl" },
+                            { key: "Average Particle Size", value: "~75 μm" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "0.12-0.14" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "600 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "Dynamic Load Capacity (/mL Resin)*", value: "≥ 30 mg BSA" },
+                            { key: "pH Stability (Operation)", value: "3-12" },
+                            { key: "pH Stability (CIP)", value: "2-14" },
+                            { key: "Operating Temperature", value: "4-35 °C, avoid freezing" },
+                            { key: "Operating Pressure", value: "≤ 0.3 MPa (3.0 bar)" },
+                            { key: "Chemical Stabilities", value: "Compatible with standard buffer salt systems; Other solvents: 1.0 M NaOH, 8.0 M Urea, 6.0 M Guanidine HCl, DMSO, 0-100% Ethanol, 1.0 M Acetic Acid, etc." },
+                            { key: "Storage Conditions", value: "Please refer to '7. Product Storage' for details" },
+                            { key: "Transportation Conditions", value: "4-35 °C, 50% (v/v) stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Antibody field, recombinant protein, nucleic acid" }
+                        ]
+                    },
+                    "agarosix-mc90-mmc": { productName: "Agarosix MC90-MMC", specs: [] },
+                    "proteomix-por15-q": { productName: "Proteomix POR15-Q", specs: [] },
+                    "proteomix-por30-q": { productName: "Proteomix POR30-Q", specs: [] },
+                    "proteomix-por15-mq": { 
+                        productName: "Proteomix POR15-MQ", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Mixed-mode strong anion exchange" },
+                            { key: "Functional group", value: "Mixed mode strong anion exchange group" },
+                            { key: "Particle size (μm)", value: "15.0±2.0" },
+                            { key: "Recommended flow rate range (or maximum operating flow rate)*", value: "1800 cm/hr(50 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥35 mg BSA" },
+                            { key: "PH stability (operation)", value: "2 - 12" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "working temperature", value: "4 - 40 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with buffer salt systems (Tris, phosphate, acetate buffers), common organic-aqueous systems (acetonitrile, ethanol, etc.)" },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Oligonucleotides" }
+                        ]
+                    },
+                    "proteomix-por30-mq": { 
+                        productName: "Proteomix POR30-MQ", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Mixed-mode strong anion exchange" },
+                            { key: "Functional group", value: "Mixed mode strong anion exchange group" },
+                            { key: "Particle size (μm)", value: "30.0±5.0" },
+                            { key: "Recommended flow rate range (or maximum operating flow rate)*", value: "2000 cm/hr(50 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥25 mg BSA" },
+                            { key: "PH stability (operation)", value: "2 - 12" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "working temperature", value: "4 - 40 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with buffer salt systems (Tris, phosphate, acetate buffers), common organic-aqueous systems (acetonitrile, ethanol, etc.)" },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Oligonucleotides" }
+                        ]
+                    },
+                    "monomix-mab60-q": { 
+                        productName: "Monomix Mab60-Q", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Anion Exchange" },
+                            { key: "Functional Group", value: "-N+(CH3)3" },
+                            { key: "Particle Size (μm)", value: "~60" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "0.03~0.09" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "≥ 80 mg BSA" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "600 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "pH Stability (operation)", value: "2 - 13" },
+                            { key: "pH Stability (CIP)", value: "1 - 14" },
+                            { key: "Operating Temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (10 bar)" },
+                            { key: "Chemical Stability*", value: "Common aqueous buffer systems; Other solvents: 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, 70% ethanol, etc." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" }
+                        ] 
+                    },
+                    "proteomix-por50-hq": { 
+                        productName: "Proteomix POR50-HQ", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Anion Exchange" },
+                            { key: "Functional group", value: "-N+(CH3)3" },
+                            { key: "Particle size (μm)", value: "~50" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "≥ 0.08" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "800 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥60 mg BSA" },
+                            { key: "PH stability (operation)", value: "2 - 13" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "Operating temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with common aqueous buffers; Other solvents: 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, 70% ethanol, etc." },
+                            { key: "Storage Conditions", value: "Please refer to 'Section 8: Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" }
+                        ] 
+                    },
+                    "agarosix-q-ff": { productName: "Agarosix-Q FF", specs: [] },
+                    "monomix-hc60-deae-excel": { 
+                        productName: "Monomix HC60-DEAE Excel", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Weak Anion" },
+                            { key: "Functional group", value: "-N(CH2CH3)2" },
+                            { key: "Particle size (μm)", value: "~60" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "0.08–0.18" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "80–120 mg BSA" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "900 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "PH stability (operation)", value: "2 - 13" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "Working temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with common aqueous buffers; other solvents include 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, 70% ethanol, etc." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" }
+                        ] 
+                    },
+                    "proteomix-por15-s": { 
+                        productName: "Proteomix POR15-S", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Cation" },
+                            { key: "Functional Group", value: "-SO3" },
+                            { key: "Particle Size", value: "~15 μm" },
+                            { key: "Recommended Flow Rate Range (Or Maximum Operating Flow Rate)*", value: "1800 cm/hr(50 bar)" },
+                            { key: "Dynamic Binding Capacity* (/ml Resin)", value: "≥ 35 mg Lysozyme" },
+                            { key: "Ph Stability (Operation)", value: "2 - 13" },
+                            { key: "Ph Stability (CIP)", value: "1 - 14" },
+                            { key: "Operating Temperature", value: "4 - 35 °C" },
+                            { key: "Operating Pressure", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical Stability*", value: "Compatible with buffer salt systems (Tris, phosphate, acetate buffers, etc.), common organic/water systems (acetonitrile, ethanol, etc.)" },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Insulin, nucleic acids" }
+                        ] 
+                    },
+                    "proteomix-por30-s": { 
+                        productName: "Proteomix POR30-S", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Cation" },
+                            { key: "Functional Group", value: "-SO3" },
+                            { key: "Particle Size", value: "~30 μm" },
+                            { key: "Recommended Flow Rate Range (Or Maximum Operating Flow Rate)*", value: "2000 cm/hr(50 bar)" },
+                            { key: "Dynamic Binding Capacity* (/ml Resin)", value: "≥ 35 mg Lysozyme" },
+                            { key: "Ph Stability (Operation)", value: "2 - 13" },
+                            { key: "Ph Stability (CIP)", value: "1 - 14" },
+                            { key: "Operating Temperature", value: "4 - 35 °C" },
+                            { key: "Operating Pressure", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical Stability*", value: "Compatible with buffer salt systems (Tris, phosphate, acetate buffers, etc.), common organic/water systems (acetonitrile, ethanol, etc.)" },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation Conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Insulin, nucleic acids" }
+                        ] 
+                    },
+                    "monomix-mab60-sp": { 
+                        productName: "Monomix Mab60-SP", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Cation" },
+                            { key: "Functional group", value: "-SO3−" },
+                            { key: "Particle size (μm)", value: "~60" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "400 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "≥ 60 mg Lysozyme" },
+                            { key: "PH stability (operation)", value: "2 - 12" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "Operating temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (10 bar)" },
+                            { key: "Chemical stability*", value: "Common reagents: aqueous buffers, low-concentration organic phases mixed with buffer salts, etc. Other reagents: 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, and 70% ethanol." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Antibodies, ADCs, vaccines, recombinant proteins" }
+                        ] 
+                    },
+                    "proteomix-por50-hs": { 
+                        productName: "Proteomix POR50-HS", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Cation Exchange" },
+                            { key: "Functional group", value: "-SO3H" },
+                            { key: "Particle size (μm)", value: "~50" },
+                            { key: "Ion Exchange Capacity (eq/L)", value: "≥ 0.08" },
+                            { key: "Flow Rate/Pressure", value: "600 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "≥ 40 mg Lysozyme (/mL of filler)" },
+                            { key: "PH stability (operation)", value: "2 - 13" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "Working temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 10.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with commonly used aqueous buffers, 1.0 M NaOH, DMSO, DMAC, 6.0 M Guanidine Hydrochloride, 30% Isopropanol, 70% Ethanol, etc." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Application Areas", value: "Antibodies, Vaccines, Nucleic Acids" }
+                        ]
+                    },
+                    "monomix-hc60-sp": { 
+                        productName: "Monomix HC60-SP", 
+                        specs: [
+                            { key: "Ion Exchange Type", value: "Strong Cation" },
+                            { key: "Functional group", value: "-SO3H" },
+                            { key: "Particle size (μm)", value: "~60" },
+                            { key: "Ion Exchange Capacity", value: "0.08–0.18" },
+                            { key: "Dynamic Binding Capacity (/mL Resin)*", value: "≥ 80 mg Lysozyme" },
+                            { key: "Flow Rate/Pressure Relationship*", value: "400 cm/hr (Operating Pressure 2 bar)" },
+                            { key: "PH stability (operation)", value: "2 - 12" },
+                            { key: "PH stability (CIP)", value: "1 - 14" },
+                            { key: "Working temperature", value: "4 - 35 °C" },
+                            { key: "Pressure Tolerance", value: "≤ 1.0 MPa (100 bar)" },
+                            { key: "Chemical stability*", value: "Common reagents: common aqueous buffers, low-concentration organic phases mixed with buffer salts, etc. Other reagents: 1.0 M NaOH, DMSO, DMAC, 6.0 M guanidine hydrochloride, 30% isopropanol, and 70% ethanol" },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Antibodies, vaccines, recombinant proteins" }
+                        ] 
+                    },
+                    "agarosix-sp-ff": { productName: "Agarosix-SP FF", specs: [] },
+                    "poloar-mc-cm": { productName: "Poloar MC-CM", specs: [] },
+                    "monomix-mc10-sec": { productName: "Monomix MC10-SEC", specs: [] },
+                    "monomix-mc15-sec": { productName: "Monomix MC15-SEC", specs: [] },
+                    "monomix-mc30-sec": { productName: "Monomix MC30-SEC", specs: [] },
+                    "monomix-mc60-sec": { productName: "Monomix MC60-SEC", specs: [] },
+                    "agrosix-mc45-sec": { productName: "Agrosix MC45-SEC", specs: [] },
+                    "agrosix-mc65-sec": { productName: "Agrosix MC65-SEC", specs: [] },
+                    "agrosix-mc90-sec": { productName: "Agrosix MC90-SEC", specs: [] },
+                    "polar-mc30-hic-ether": { productName: "Polar MC30-HIC Ether", specs: [] },
+                    "polar-mc60-hic-ether": { productName: "Polar MC60-HIC Ether", specs: [] },
+                    "monomix-mc30-hic-butyl": { productName: "Monomix MC30-HIC Butyl", specs: [] },
+                    "monomix-mc60-hic-butyl": { productName: "Monomix MC60-HIC Butyl", specs: [] },
+                    "polar-mc30-hic-butyl": { productName: "Polar MC30-HIC Butyl", specs: [] },
+                    "polar-mc60-hic-butyl": { productName: "Polar MC60-HIC Butyl", specs: [] },
+                    "monomix-mc30-hic-phenyl": { 
+                        productName: "Monomix MC30-HIC Phenyl", 
+                        specs: [
+                            { key: "Functional Group", value: "Phenyl" },
+                            { key: "Average Particle Size (μm)", value: "~30" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "~45 mg Lysozyme" },
+                            { key: "PH stability (operation)", value: "2-13" },
+                            { key: "PH stability (CIP)", value: "1-14" },
+                            { key: "Operating Temperature", value: "4-35°C" },
+                            { key: "Pressure Tolerance", value: "≤ 3.0 MPa (10 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with mixtures of water and acetonitrile, acetone, or methanol; commonly used buffer systems: Tris, phosphate, acetate buffers, etc.; other reagents: ethanol, 2% SDS, 1% Tween 20, 0.5 M NaOH." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Recombinant proteins, plasmids, antibodies" }
+                        ]
+                    },
+                    "monomix-mc60-hic-phenyl": { 
+                        productName: "Monomix MC60-HIC Phenyl", 
+                        specs: [
+                            { key: "Functional Group", value: "Phenyl" },
+                            { key: "Average Particle Size (μm)", value: "~60" },
+                            { key: "Dynamic Binding Capacity* (/mL Resin)", value: "~40 mg Lysozyme" },
+                            { key: "Flow rate/pressure relationship*", value: "600 cm/hr" },
+                            { key: "PH stability (operation)", value: "2-13" },
+                            { key: "PH stability (CIP)", value: "1-14" },
+                            { key: "Operating Temperature", value: "4-35°C" },
+                            { key: "Pressure Tolerance", value: "≤ 3.0 MPa (10 bar)" },
+                            { key: "Chemical stability*", value: "Compatible with mixtures of water and acetonitrile, acetone, or methanol; commonly used buffer systems: Tris, phosphate, acetate buffers, etc.; other reagents: ethanol, 2% SDS, 1% Tween 20, 0.5 M NaOH." },
+                            { key: "Storage Conditions", value: "Please refer to '8. Product Storage' for details" },
+                            { key: "Transportation conditions", value: "4-35 °C, stored in 20% ethanol" },
+                            { key: "Typical Applications", value: "Recombinant proteins, plasmids, antibodies" }
+                        ]
+                    },
+                    "polar-mc30-hic-phenyl": { productName: "Polar MC30-HIC Phenyl", specs: [] },
+                    "polar-mc60-hic-phenyl": { productName: "Polar MC60-HIC Phenyl", specs: [] },
+                    "generik-mc30-hic-phenyl": { productName: "Generik MC30-HIC Phenyl", specs: [] },
+                    "generik-mc60-hic-phenyl": { productName: "Generik MC60-HIC Phenyl", specs: [] },
+                    "polyrp": { 
+                        productName: "PolyRP", 
+                        specs: [
+                            { key: "Matrix", value: "Polystyrene/divinylbenzene (PS/DVB)" },
+                            { key: "Average Particle Size (μm)", value: "10" },
+                            { key: "Average Pore Size (Å)", value: "100" },
+                            { key: "Bulk Density (g/mL)", value: "0.29± 0.03" },
+                            { key: "Specific Surface Area (m2/g)", value: "200-1000" },
+                            { key: "Pore Volume (mL/g)", value: "0.9-1.4" },
+                            { key: "Swelling Coefficient (in Methanol)", value: "≤3%" },
+                            { key: "Linear Flow Rate Range (cm/h)", value: "100-600" },
+                            { key: "DAC Recommended Packing Pressure", value: "2-4 MPa" },
+                            { key: "Operating Pressure", value: "≤10 MPa" },
+                            { key: "Operating Temperature", value: "4-40°C" },
+                            { key: "pH Stability (Operation)", value: "1-13" },
+                            { key: "pH Stability (CIP)", value: "1-14" },
+                            { key: "Mobile Phase Compatibility", value: "Stable in various organic solvents and aqueous solutions, such as: Water, Acetonitrile, Acetone, Methanol, Ethanol, Isopropanol, Tetrahydrofuran, 1.0 M HCl, 1 M NaOH, 1 M HCl/90% Methanol, 90% Acetic Acid, 0.45 M NaOH/40% Isopropanol, 6 M Guanidine Hydrochloride" },
+                            { key: "Storage Conditions", value: "50% (v/v), stored in 20% Ethanol at 4-30°C" },
+                            { key: "Sterilization Conditions", value: "121°C, 20min" }
+                        ] 
+                    },
+                    "gp-c18": { 
+                        productName: "GP-C18", 
+                        specs: [
+                            { key: "Particle Size (μm)", value: "10" },
+                            { key: "Particle Size Distribution", value: "≤1.35" },
+                            { key: "Pore Size (Å)", value: "120" },
+                            { key: "Column Packing Density (g/mL)", value: "0.65" },
+                            { key: "Specific Surface Area (m2/g)", value: "300" },
+                            { key: "Pore Volume (mL/g)", value: "1.0" },
+                            { key: "Carbon Loading (%)", value: "17.0" },
+                            { key: "pH Stability", value: "2-8.5" },
+                            { key: "Bonding Method", value: "Single-layer full-end-capping" },
+                            { key: "Features and Applications", value: "The most versatile reversed-phase resin, widely used for drug molecules, synthetic peptides, natural products, and acidic, neutral, and basic compounds." }
+                        ]
+                    },
+                    
+                    "bio-c18": { 
+                        productName: "Bio-C18", 
+                        specs: [
+                            { key: "Particle Size (μm)", value: "10" },
+                            { key: "Particle Size Distribution", value: "≤1.35" },
+                            { key: "Pore Size (Å)", value: "200" },
+                            { key: "Column Packing Density (g/mL)", value: "0.61" },
+                            { key: "Specific Surface Area (m2/g)", value: "200" },
+                            { key: "Pore Volume (mL/g)", value: "1.0" },
+                            { key: "Carbon Loading (%)", value: "10.0" },
+                            { key: "pH Stability", value: "2-8.5" },
+                            { key: "Bonding Method", value: "Single-layer full-end-capping" },
+                            { key: "Features and Applications", value: "Suitable for separations that require larger pore sizes or high water content in the mobile phase." }
+                        ]
+                    },
+                    "br-c18": { 
+                        productName: "BR-C18", 
+                        specs: [
+                            { key: "Particle Size (μm)", value: "10" },
+                            { key: "Particle Size Distribution", value: "≤1.35" },
+                            { key: "Column Packing Density (g/mL)", value: "0.64" },
+                            { key: "Pore Size (Å)", value: "120" },
+                            { key: "Specific Surface Area (m2/g)", value: "350" },
+                            { key: "Pore Volume (mL/g)", value: "1.0" },
+                            { key: "Carbon Loading (%)", value: "19.5" },
+                            { key: "pH Stability", value: "1.5 - 11" }
+                        ] 
+                    },
+                    "default": {
+                        productName: "New Product",
+                        specs: [
+                            {key: "Specs are currently not available for this product.", value: "Please read the user manual for more information."}
+                        ]
+                    }
+                };
+                
+
+                //find what product is being viewed
+                const keys = Object.keys(specs);
+                let selectedKeys = [];
+
+                //add all possible products (mabpurix will overwrite mabpurix-a65 since they both contain mabpurix)
+                for(let i = 0; i<keys.length; i++){
+                    if(url.includes(keys[i])){
+                        selectedKeys.push(keys[i]);
+                    }
+                }
+                
+                //use the longest one (guarantees the most specific product)
+                selectedKeys.sort((a, b) => b.length - a.length);
+
+                //if no specs defined yet, use default
+                const selectedKey = selectedKeys[0] || 'default';
+                const product = specs[selectedKey];
+
+                //add the product specs to the table
+                document.getElementById('productNameHeader').textContent += ' ' + product.productName;
+
+                const tbody = document.getElementById('specBody');
+                product.specs.forEach(spec => {
+                    const row = document.createElement('tr');
+                    const keyCell = document.createElement('td');
+                    keyCell.textContent = spec.key;
+                    const valueCell = document.createElement('td');
+                    valueCell.textContent = spec.value;
+                    row.appendChild(keyCell);
+                    row.appendChild(valueCell);
+                    tbody.appendChild(row);
+                });
+             
+                const newHeader = document.getElementById('productNameHeader').textContent;
+                
+                  
+                
+                // Wait for 500 ms  
+                        
+
+                        
+            } else {
+                table.style.display = 'none';
+            }
+            
+        }
+
+
+        // Update URL every second
+        setInterval(updateURL, 500);
+
+        // Initial URL update
+        updateURL();
+            // Log all products with null specs
+            
+    </script>
+</body>
+</html>

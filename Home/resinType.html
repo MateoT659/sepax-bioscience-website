@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Display</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>   
+    <style>
+        body {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: "Poppins", sans-serif;
+            color: #2c2c2c;
+            text-align: center;
+        }
+        h1 {
+            font-family: "Poppins", sans-serif;
+            font-size: 55px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 20px 0 10px;
+        }
+        h2 {
+            font-family: "Poppins", sans-serif;
+           font-size: 26px;
+           font-weight: 400;
+           font-style: italic;
+           color: #555;
+           margin-bottom: 15px;
+         }
+        p {
+            font-family: "Poppins", sans-serif;
+            font-size: 18px;
+           max-width: 700px;
+           margin: 0 auto;
+           color: #444;
+        }
+        .leading-dots {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            line-height: .5;
+            color: #000;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .leading-dots p strong {
+            font-size: 36px;
+            font-weight: 700;
+            animation: bounce 1.5s infinite;
+        }
+       
+        .leading-dots p:nth-child(2) strong {
+            animation-delay: 0.3s;
+        }
+        .leading-dots p:nth-child(3) strong {
+            animation-delay: 0.6s;
+        }
+        .leading-dots p:nth-child(4) strong {
+            animation-delay: 0.9s;
+        }
+        .leading-dots p:nth-child(5) strong {
+            animation-delay: 1.2s;
+        }
+        .product-container{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+            max-height: 100%;
+            overflow: hidden;
+            flex-wrap:wrap;
+            width:90%;
+            padding-bottom: 100px;
+        }
+        .product-row {
+            display: flex;
+            
+            justify-content: center;
+            flex-wrap: nowrap;
+            padding: 2px;
+        }
+        .product {
+            display: flex;
+            flex: 1;
+            position: relative;
+            text-align: center;
+
+            overflow: hidden;
+            width:25%;
+            min-width: 25%;
+            max-width: 25%;
+            aspect-ratio: 1;
+            background-color: black;
+        }
+        .product img {
+            flex: 1;
+            height: 100%;
+            width: 100%;
+            opacity: 85%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            transition: all 0.3s ease-in-out;
+        }
+        .product a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+        }
+        .product-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease-in-out;
+            color: white;
+            font-size: calc(2.5vw);
+            background: rgba(0, 0, 0, 0);
+            text-shadow: 0px 0px 10px black;
+            padding: 1px;
+            pointer-events: none;
+            font-family: "Poppins", sans-serif;
+            font-weight: 500;
+            line-height: 1;
+        }
+        .product img:hover + .product-title {
+            transform: scale(1.2) translate(-41%, -41%);
+            
+        }
+        .product img:hover {
+            transform: scale(1);
+            opacity: 0.50;
+            z-index: 10;
+        }
+    .leading-dots p strong {
+        font-size: 36px;
+        font-weight: 700;
+        animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+
+        
+    }
+   .fade-in-up-pre {
+        opacity:0;
+        transform: translateY(70px);
+   }
+    .fade-in-up {
+        animation: fadeIn 2s, moveUp 2s;
+    }
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        10% {
+            opacity: 0;
+        }
+        75% {
+            opacity: 1;
+        }
+    }
+    @keyframes moveUp {
+        0% {
+            transform: translateY(70px);
+        }
+        10% {
+            transform: translateY(70px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+    body {
+        background-color: #fff;
+    }
+       
+    </style>
+    <script>
+        function redirectTo(url) {
+            window.top.location.href = url;
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- <div class="leading-dots">
+    <p><strong>.</strong></p>
+    <p><strong>.</strong></p>
+    <p><strong>.</strong></p>
+    <p><strong>.</strong></p>
+</div> -->
+<div id="text" class="fade-in-up-pre">
+<h1>PROCESS RESINS, REDEFINED</h1>
+<h2>Advancing Bioprocessing with Precision and Performance</h2>
+<p>Explore a portfolio where innovation meets reliability. Empower your processes with cutting-edge solutions designed for excellence in biomolecule separation and purification.</p>
+</div>
+<br/>
+
+<div id = 'buttons', class = 'fade-in-up-pre'>
+<div class="product-container">
+    
+    
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/hydrophobic-interaction')">
+            <img src="https://media.gettyimages.com/id/1919641845/photo/abstract-background-floating-bubbles-violet-bokeh.webp?b=1&s=612x612&w=0&k=20&c=TvaIQL2u1cdUK1nORAsF4dEx4ZPy5bVZ2t9yLERdbJw=" alt="Product 6">
+            <div class="product-title">Hydrophobic Interaction</div>
+        </a>
+    </div>
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/anion-exchange')">
+            <img src="https://media.gettyimages.com/id/2175304686/photo/abstract-artistic-composition-of-hundreds-of-fast-moving-purple-particles-in-a-3d-render-on-a.webp?b=1&s=612x612&w=0&k=20&c=lw-flXt-tE-2EgP_IIrA6uONlT51wuAn_Q-OtlpZEUc=" alt="Product 3" >
+            <div class="product-title">Anion Exchange</div>
+        </a>
+    </div> 
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/cation-exchange')">
+            <img src="https://media.gettyimages.com/id/1448456737/photo/big-data-stream-information-technology-background-the-dynamic-wave-background-consisting-of.webp?b=1&s=612x612&w=0&k=20&c=vEdYRQ6eTlrPFOJS9MadUZlwHHMLB5HXPO9U-8EbMqg=" alt="Product 4">
+            <div class="product-title">Cation Exchange</div>
+        </a>
+    </div>
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/size-exclusion')">
+            <img src="https://media.gettyimages.com/id/941338190/photo/glowing-green-neural-network-3d-rendering.webp?b=1&s=612x612&w=0&k=20&c=FoEqNFkcP3zd-syCh7Bi0f5gNt113-dEk7F26UQLyAA=" alt="Product 5">
+            <div class="product-title">Size Exclusion</div>
+        </a>
+    </div>
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/affinity')"></a>
+            <img src="https://media.gettyimages.com/id/1199414774/photo/purple-abstract-background.webp?b=1&s=612x612&w=0&k=20&c=94q3jr_EtqRAfdAQSsfz6xPKc6Aa07L7lblQ0MZpzfg=" alt="Affinity">
+            <div class="product-title">Affinity</div>
+        </a>
+    </div>
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/reversed-phase')"></a>
+            <img src="https://media.gettyimages.com/id/1338024599/photo/molecular-structure-close-up-cs.webp?b=1&s=612x612&w=0&k=20&c=o0xJGzsGdCaxbkXuerR_WziwwAQe1W7z9uRSTESzMOQ=" alt="Product 7" style="filter: brightness(80%);">
+            <div class="product-title">Reversed Phase</div>
+        </a>
+    </div>
+    
+    <div class="product">
+        <a href="javascript:void(0);" onclick="redirectTo('https://sepax-bio.com/mix-mode')"></a>
+            <img src="https://media.gettyimages.com/id/1388181297/photo/4k-abstract-particle-wave-lines-dots-background-colors-road-beautiful-glitter-loop-stock-video.webp?b=1&s=612x612&w=0&k=20&c=SzuW8uXZRf9f26wsktg8Tk8q2y42h8Gk1gVFM_yiTEA=" alt="Product 2" >
+            <div class="product-title">Mix Mode</div>
+        </a>
+    </div>
+    
+</div>
+</body>
+
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                entry.target.classList.remove('fade-in-up-pre');
+            }
+        });
+    });
+
+    document.querySelectorAll('#text, #buttons').forEach((el) => {
+        observer.observe(el);
+    });
+    
+</script>
+</html>
