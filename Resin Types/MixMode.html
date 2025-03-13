@@ -31,9 +31,11 @@
         }
     </style>
     <script>
-        function redirectTo(url) {
-            window.top.location.href = url;
-        }
+        window.top.document.querySelectorAll('a').forEach((a) => {
+            if (a.textContent.toLowerCase().includes("explore")) {
+            a.setAttribute('target', '_top');
+            }
+        });
     </script>
 </head>
 <body>
@@ -47,26 +49,24 @@
         </thead>
         <tbody>
             <tr>
-    <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode')">Core Shell Mix Mode</td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode')">Monomix Core 500</a></td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode')">290160500</a></td>
-</tr>
-            <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode')">Monomix Core 1000</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode')">290160950</td>
+            <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" target="_top">Core Shell Mix Mode</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" target="_top">Monomix Core 500</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" target="_top">290160500</a></td>
             </tr>
             <tr>
-                <td class='resin-td' rowspan="2"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ion-exchange')">Ion Exchange</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ion-exchange')">Agarosix MC90-MMA</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ion-exchange')">251090990</td>
-            	</tr>
-			<tr>
-                		<td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ion-exchange')">Agarosix MC90-MMC</a></td>
-                		<td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ion-exchange')">251190990</td>
-           		 </tr>
-          
-              
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" target="_top">Monomix Core 1000</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/core-shell-mix-mode" target="_top">290160950</a></td>
             </tr>
+            <tr>
+            <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/ion-exchange" target="_top">Ion Exchange</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ion-exchange" target="_top">Agarosix MC90-MMA</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ion-exchange" target="_top">251090990</a></td>
+            </tr>
+            <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ion-exchange" target="_top">Agarosix MC90-MMC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ion-exchange" target="_top">251190990</a></td>
+            </tr>
+        </tbody>
         </tbody>
     </table>
 </body>

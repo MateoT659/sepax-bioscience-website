@@ -31,9 +31,11 @@
         }
     </style>
     <script>
-        function redirectTo(url) {
-            window.top.location.href = url;
-        }
+        window.top.document.querySelectorAll('a').forEach((a) => {
+            if (a.textContent.toLowerCase().includes("explore")) {
+            a.setAttribute('target', '_top');
+            }
+        });
     </script>
 </head>
 <body>
@@ -47,25 +49,25 @@
         </thead>
         <tbody>
             <tr>
-    <td class='resin-td' rowspan="1"><a href="https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp')">PS/DVB Based RP</td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/ps%2Fdvb-based-rp" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ps%2Fdvb-based-rp')">PolyRP</a></td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp')">260115100, 260115300, 260115500, 260115950,
-260130100, 260130300, 260130500, 260130950 </a></td>
-</tr>
- 
-                <td class='resin-td' rowspan = "3"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">Silica Based RP</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">GP-C18</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">110110121, 110130121, 110150121  </td>
+            <td class='resin-td' rowspan="1"><a href="https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp" target="_top">PS/DVB Based RP</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ps%2Fdvb-based-rp" target="_top">PolyRP</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/psdvb-based-rp" target="_top">260115100, 260115300, 260115500, 260115950,
+    260130100, 260130300, 260130500, 260130950 </a></td>
             </tr>
-
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">Bio-C18</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">110510301</td>
+            <tr>
+            <td class='resin-td' rowspan="3"><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">Silica Based RP</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">GP-C18</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">110110121, 110130121, 110150121</a></td>
             </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">BR-C18</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/silica-based-rp')">110810121</td>
+            <tr></tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">Bio-C18</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">110510301</a></td>
             </tr>
+            <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">BR-C18</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/silica-based-rp" target="_top">110810121</a></td>
+            </tr>
+        </tbody>
 
             
         </tbody>

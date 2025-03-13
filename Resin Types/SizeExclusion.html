@@ -31,9 +31,11 @@
         }
     </style>
     <script>
-        function redirectTo(url) {
-            window.top.location.href = url;
-        }
+        window.top.document.querySelectorAll('a').forEach((a) => {
+            if (a.textContent.toLowerCase().includes("explore")) {
+            a.setAttribute('target', '_top');
+            }
+        });
     </script>
 </head>
 <body>
@@ -45,38 +47,36 @@
                 <th>Product Number</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td class='resin-td' rowspan = "4"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">PMA Based SEC</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">Monomix MC10-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">280110300, 280110500, 280110950, 280110980</td>
-            </tr>
-
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">Monomix MC15-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">280115300, 280115500, 280115950, 280115980</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">Monomix MC30-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">280130300, 280130500, 280130950, 280130980 </td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">Monomix MC60-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-sec')">280160300, 280160500, 280160950, 280160980 </td>
-            </tr>
-    <td class='resin-td' rowspan="3"><a href="https://sepax-bio.com/all-products/ols/categories/strong-anion-exchange-hr" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">Agarose Based SEC</td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">Agrosix MC45-SEC</a></td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">250145990</a></td>
-</tr>
-            <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">Agrosix MC65-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">250165990</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">Agrosix MC90-SEC</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-sec')">250190990</td>
-            </tr>
-
+        <tr>
+            <td class='resin-td' rowspan="4"><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">PMA Based SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">Monomix MC10-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">280110300, 280110500, 280110950, 280110980</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">Monomix MC15-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">280115300, 280115500, 280115950, 280115980</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">Monomix MC30-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">280130300, 280130500, 280130950, 280130980</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">Monomix MC60-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-sec" target="_top">280160300, 280160500, 280160950, 280160980</a></td>
+        </tr>
+        <tr>
+            <td class='resin-td' rowspan="3"><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">Agarose Based SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">Agrosix MC45-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">250145990</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">Agrosix MC65-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">250165990</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">Agrosix MC90-SEC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-sec" target="_top">250190990</a></td>
+        </tr>
 
         </tbody>
     </table>

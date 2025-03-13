@@ -31,9 +31,11 @@
         }
     </style>
     <script>
-        function redirectTo(url) {
-            window.top.location.href = url;
-        }
+        window.top.document.querySelectorAll('a').forEach((a) => {
+            if (a.textContent.toLowerCase().includes("explore")) {
+            a.setAttribute('target', '_top');
+            }
+        });
     </script>
 </head>
 <body>
@@ -47,43 +49,43 @@
         </thead>
         <tbody>
             <tr>
-    <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity')">Agarose Based Protein A Affinity</td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity')">MabPurix A65</a></td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity')">270765990</a></td>
-</tr>
-            <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity')">MabPurix A65 Excel</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity')">270965990</td>
+            <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" target="_top">Agarose Based Protein A Affinity</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" target="_top">MabPurix A65</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" target="_top">270765990</a></td>
             </tr>
             <tr>
-                <td class="resin-td"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity')">PMA Based Protein A Affinity</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity')">MabPurix P45</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity')">270845990</td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" target="_top">MabPurix A65 Excel</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/agarose-based-protein-a-affinity" target="_top">270965990</a></td>
             </tr>
             <tr>
-                <td class="resin-td" rowspan="2"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/dt-affinity')">dT Affinity</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/dt-affinity')">Proteomix POR50-dT20</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/dt-affinity')">2221509D0</td>
+            <td class="resin-td"><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity" target="_top">PMA Based Protein A Affinity</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity" target="_top">MabPurix P45</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/pma-based-protein-a-affinity" target="_top">270845990</a></td>
             </tr>
             <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/dt-affinity')">Monomix dT20</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/dt-affinity')">283030950</td>
+            <td class="resin-td" rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/dt-affinity" target="_top">dT Affinity</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/dt-affinity" target="_top">Proteomix POR50-dT20</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/dt-affinity" target="_top">2221509D0</a></td>
             </tr>
             <tr>
-                <td class="resin-td" rowspan="2"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ni-affinity')">Ni Affinity</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ni-affinity')">Agarosix MC90-NTA Ni</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ni-affinity')">251390990</td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/dt-affinity" target="_top">Monomix dT20</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/dt-affinity" target="_top">283030950</a></td>
             </tr>
             <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ni-affinity')">Agarosix MC90-Ni Excel</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ni-affinity')">251590990</td>
+            <td class="resin-td" rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/ni-affinity" target="_top">Ni Affinity</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ni-affinity" target="_top">Agarosix MC90-NTA Ni</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ni-affinity" target="_top">251390990</a></td>
             </tr>
             <tr>
-                <td class="resin-td"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/boronate-affinity')">Boronate Affinity</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/boronate-affinity')">Monomix HC60-Boronate</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/boronate-affinity')">285960950</td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ni-affinity" target="_top">Agarosix MC90-Ni Excel</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ni-affinity" target="_top">251590990</a></td>
+            </tr>
+            <tr>
+            <td class="resin-td"><a href="https://sepax-bio.com/all-products/ols/categories/boronate-affinity" target="_top">Boronate Affinity</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/boronate-affinity" target="_top">Monomix HC60-Boronate</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/boronate-affinity" target="_top">285960950</a></td>
             </tr>
         </tbody>
-    </table>
+        </table>
 </body>
 </html>

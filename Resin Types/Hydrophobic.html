@@ -31,9 +31,11 @@
         }
     </style>
     <script>
-        function redirectTo(url) {
-            window.top.location.href = url;
-        }
+        window.top.document.querySelectorAll('a').forEach((a) => {
+            if (a.textContent.toLowerCase().includes("explore")) {
+            a.setAttribute('target', '_top');
+            }
+        });
     </script>
 </head>
 <body>
@@ -45,62 +47,57 @@
                 <th>Product Number</th>
             </tr>
         </thead>
-        <tbody>
-<tr>
-    <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/strong-anion-exchange-hr" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ether-hic')">Ether HIC</td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ether-hic')">Polar MC30-HIC Ether</a></td>
-    <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ether-hic')">191130800</a></td>
-</tr>
-            <tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ether-hic')">Polar MC60-HIC Ether</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/ether-hic')">191160800</td>
-            </tr>
-
-                <td class='resin-td' rowspan = "6"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Butyl HIC</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Monomix MC30-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">281630950</td>
-            </tr>
-
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Monomix MC60-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">281660950</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Polar MC30-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">191030800</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Polar MC60-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">191060800</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Generik MC30-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">181430800</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">Generik MC60-HIC Butyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/butyl-hic')">181460800</td>
-            </tr>
-
-            <tr>
-                <td class='resin-td' rowspan = "4"><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">Phenyl HIC</td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">Monomix MC30-HIC Phenyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">281930950</td>
-            </tr>
-
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">Monomix MC60-HIC Phenyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">281960950</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">Polar MC30-HIC Phenyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">191330800</td>
-            </tr>
-<tr>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">Polar MC60-HIC Phenyl</a></td>
-                <td><a href="javascript:void(0)" onclick="redirectTo('https://sepax-bio.com/all-products/ols/categories/phenyl-hic')">191360800</td>
-                </tr>
-
+        <tr>
+            <td class='resin-td' rowspan="2"><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" target="_top">Ether HIC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" target="_top">Polar MC30-HIC Ether</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" target="_top">191130800</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" target="_top">Polar MC60-HIC Ether</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/ether-hic" target="_top">191160800</a></td>
+        </tr>
+        <tr>
+            <td class='resin-td' rowspan="6"><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Butyl HIC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Monomix MC30-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">281630950</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Monomix MC60-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">281660950</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Polar MC30-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">191030800</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Polar MC60-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">191060800</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Generik MC30-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">181430800</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">Generik MC60-HIC Butyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/butyl-hic" target="_top">181460800</a></td>
+        </tr>
+        <tr>
+            <td class='resin-td' rowspan="4"><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">Phenyl HIC</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">Monomix MC30-HIC Phenyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">281930950</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">Monomix MC60-HIC Phenyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">281960950</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">Polar MC30-HIC Phenyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">191330800</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">Polar MC60-HIC Phenyl</a></td>
+            <td><a href="https://sepax-bio.com/all-products/ols/categories/phenyl-hic" target="_top">191360800</a></td>
+        </tr>
 
         </tbody>
     </table>
