@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>   
 <html lang="en">
 <style>
     
@@ -9,34 +10,59 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 5px;
     }
-    .leading-dots p {
-        height:0px;
+    .leading-dots span {
+
+        aspect-ratio: 1/1;
+        height:5px;
+        width:5px;
+        opacity: 0;
+        background-color: black;
+        animation: blink 3s infinite;
     }
-    .leading-dots p:nth-child(2) strong {
-        animation-delay: 0.3s;
+    .leading-dots span:nth-child(0) {
+        animation-delay: 2.0s;
     }
-    .leading-dots p:nth-child(3) strong {
-        animation-delay: 0.6s;
+    .leading-dots span:nth-child(1) {
+        animation-delay: 2.2s;
     }
-    .leading-dots p:nth-child(4) strong {
-        animation-delay: 0.9s;
+    .leading-dots span:nth-child(2) {
+        animation-delay: 2.4s;
     }
-    .leading-dots p:nth-child(5) strong {
-        animation-delay: 1.2s;
+    .leading-dots span:nth-child(3) {
+        animation-delay: 2.6s;
     }
-    .leading-dots p strong {
-        height: 1px;
-        font-size:35px;
-        animation: blink 1.5s infinite;
+    .leading-dots span:nth-child(4) {
+        animation-delay: 2.8s;
+    }
+    .leading-dots span:nth-child(5) {
+        animation-delay: 3.0s;
+    }
+    .leading-dots span:nth-child(6) {
+        animation-delay: 3.2s;
+    }
+    .leading-dots span:nth-child(7) {
+        animation-delay: 3.4s;
+    }
+    .leading-dots span:nth-child(8) {
+        animation-delay: 3.6s;
+    }
+    .leading-dots h3 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 5px 0 10px;
     }
 
     @keyframes blink {
-        0%, 100% {
-            opacity: 1;
-        }
-        50% {
+        0%, 50%,100% {
             opacity: 0;
+        }
+        30% {
+            opacity: 1;
         }
     }
     /* 
@@ -77,11 +103,15 @@
 </style>
 <body>
     <div class="leading-dots" id="leading-dots-resin">
-        <p><strong>.</strong></p>
-        <p><strong>.</strong></p>
-        <p><strong>.</strong></p>
-        <p><strong>.</strong></p>
-        <p><strong>.</strong></p>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <h3>Explore</h3>
     </div>
 
     <!-- <body>
@@ -99,6 +129,9 @@
 <script>
     const debug = false;
     const doc = debug ? document : window.top.document;
+    
+
+
 
     function applyStyle(element, style) {
         for (const key in style) {
@@ -195,34 +228,43 @@
     });
 
     //OPENING ANIMATION
-
-    doc.styleSheets[0].insertRule('.leading-dots {color: #FFFFFF; display: flex; flex-direction: column; align-items: center;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p {height:1px;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(2) strong {animation-delay: 0.3s;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(3) strong {animation-delay: 0.6s;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(4) strong {animation-delay: 0.9s;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p:nth-child(5) strong {animation-delay: 1.2s;}', 0);
-    doc.styleSheets[0].insertRule('.leading-dots p strong {font-weight: 700; opacity:0; font-size: 30px; animation: blink 2s infinite; height:1px;}', 0);
-    doc.styleSheets[0].insertRule('@keyframes blink {0%, 100% {opacity: 0;} 50% {opacity: 1;}}', 0);
-
-    const tagline = doc.querySelector('h1[data-aid="HEADER_TAGLINE_RENDERED"]');
-    const headerDiv = tagline.parentElement.parentElement.parentElement.parentElement.parentElement;
     
-    const child = document.getElementById('leading-dots-resin')
-    applyClass(tagline, 'fade-in-pre');
-    applyClass(child, 'fade-in-pre');
+    if(doc.getElementById('leading-dots-resin-clone') == null
+    || window.top.href.includes('godaddy')) {
+        doc.styleSheets[0].insertRule('.leading-dots {color: #FFFFFF; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 5px;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span {aspect-ratio: 1/1; height:5px; width:5px; opacity: 0; background-color: #FFFFFF; animation: blink 3s infinite;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(0) {animation-delay: 2s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(1) {animation-delay: 2.2s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(2) {animation-delay: 2.4s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(3) {animation-delay: 2.6s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(4) {animation-delay: 2.8s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(5) {animation-delay: 3.0s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(6) {animation-delay: 3.2s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(7) {animation-delay: 3.4s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots span:nth-child(8) {animation-delay: 3.6s;}', 0);
+        doc.styleSheets[0].insertRule('.leading-dots h3 {font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; text-transform: uppercase; letter-spacing: 2px; margin: 5px 0 10px;}', 0);
+        doc.styleSheets[0].insertRule('@keyframes blink {0%, 50%, 100% {opacity: 0;} 30% {opacity: 1;}}', 0);
 
-    setTimeout(() => {
-        addFadeIn(tagline)
-        removeClass(tagline, 'fade-in-pre');
-    }, 500);
+        const tagline = doc.querySelector('h1[data-aid="HEADER_TAGLINE_RENDERED"]');
+        
+        const headerDiv = tagline.parentElement.parentElement.parentElement.parentElement.parentElement;
+        
+        const child = document.getElementById('leading-dots-resin')
+        child.setAttribute('id', 'leading-dots-resin-clone');
+        applyClass(tagline, 'fade-in-pre');
+        applyClass(child, 'fade-in-pre');
 
-    child.style.position = 'absolute';
-    child.style.bottom = '45px';
-    headerDiv.appendChild(child);
-    setTimeout(() => {
-        addFadeIn(child)
-    }, 1500);
+        setTimeout(() => {
+            addFadeIn(tagline)
+        }, 500);
+
+        child.style.position = 'absolute';
+        child.style.bottom = '20px';
+        headerDiv.appendChild(child);
+        setTimeout(() => {
+            addFadeIn(child)
+        }, 1500);
+    }
     
 </script>
 
