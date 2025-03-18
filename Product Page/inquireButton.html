@@ -1,27 +1,28 @@
+<!-- 
+ 
+LOCATION: 
+All products page, at the top of the page
+
+DESCRIPTION:
+This page manages the custom styles for the granular products page. When the user clicks on a product size,
+it will update the button to either "Inquire" or "Add to Cart" based on the size of the product.
+Also, it will hide the "Buy Now" button when a product is selected.
+This page also works in parallel with Product Page/productTables.html to move the description to the middle of the page.
+
+MAINTANANCE:
+- To update the size threshold for the "Inquire" button, modify the sizeValue comparison in the script.
+- For products with different units for the sizes (L, kG, etc.), the script may have to be updated to support them.
+- GoDaddy frequently updates the id for the "buy now" and google pay buttons, so you may have to update the script to find the correct button id.
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Display</title>
-<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
-<style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
 </head>
-<body>
-    <!-- <p id="debugBox">
-        code
-    </p> -->
-</body>
 
 <script>
     function setToInquire(button){
@@ -32,8 +33,7 @@
 
         button.textContent = ' Inquire ';
         button.style.backgroundColor = '#008080';
-        button.setAttribute('onclick', "location.href='https://sepax-bio.com/inquire?productName="+productName+"'");
-        
+        button.setAttribute('onclick', "location.href='https://sepax-bio.com/inquire?productName="+productName+"'");   
     }
 
     function setToCart(button){
@@ -45,27 +45,30 @@
     }
 
     window.top.document.addEventListener('click', ()=>{
-        //click listener for the page
+        //runs whenever the page is clicked
         
+        // hide the description box on update
+        const desc = window.top.document.querySelector('div[data-aid="PRODUCT_DESCRIPTION_RENDERED"]');
+        if (desc !== null){
+            desc.style.display = 'none';
+        }
+        // hide the buy now button on update
+        window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
+
+
         //find all sizeboxes
         const sizes = window.top.document.querySelectorAll(
             'div[data-ux="Block"] > p[data-ux="Details"]'
         );
         
-        const desc = window.top.document.querySelector('div[data-aid="PRODUCT_DESCRIPTION_RENDERED"]');
-
-        if (desc !== null){
-            desc.style.display = 'none';
-        }
-
         //find enabled sizebox and determine size
         const selected = Array.from(sizes).find(size => size.hasAttribute('disabled') === false);
         if (selected == null){
             return;
         }
-        
+
+        //pares size value in mL
         const sizeText = selected.textContent;
-        //in mL:
         const sizeValue = sizeText.endsWith('mL') ? parseFloat(sizeText) : parseFloat(sizeText)* 1000;
 
         //find the button
@@ -75,12 +78,8 @@
         }
 
         if (button == null){
-            //button not found
             return;
         }
-
-
-        window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
 
         let inquireButton = window.top.document.getElementById('inquire-btn');
 
@@ -93,8 +92,7 @@
 
         //set button to inquire or cart based on size (in mL)
         if (sizeValue<=5){
-            //TO CART BUTTON
-
+            //Add to cart mode: enable add to cart button, show price
             inquireButton.style.display = 'none';
             button.style.display = 'block';
 
@@ -104,8 +102,7 @@
                 }
             )
         } else {
-            //TO INQUIRE BUTTON
-
+            //Inquire mode: enable inquire button, hide price
             inquireButton.style.display = 'block';
             button.style.display = 'none';
             window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
@@ -115,28 +112,6 @@
             )
         }
     });
-
-    
-    //DEBUGGING
-    // document.getElementById('debugBox').addEventListener('click', ()=>{
-        
-    //     let button = window.top.document.getElementById('addtocart-btn-0');
-    //     for(let i=1; i<400 && button == null; i++){
-    //         button = window.top.document.getElementById('addtocart-btn-'+i);
-    //     }
-
-    //     if (button == null){
-    //         //button not found
-    //         return;
-    //     }
-
-    //     const state = button.textContent;
-    //     if (state === 'Inquire'){
-    //         setToCart(button);
-    //     } else {
-    //         setToInquire(button);
-    //     }
-    // });
 
 </script>
 
