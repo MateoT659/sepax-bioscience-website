@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strong Anion Exchange High Resolution</title>
+    <style>
+        /* Root variables for colors */
+        :root {
+            --primaryColor: rgb(0, 128, 128); /* teal for consistency */
+            --hoverColor: #ff4500; /* Orange-red, unused for text now */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white; /* Page background set to white */
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1000px; /* Increased to accommodate larger boxes */
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primaryColor);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .scenario {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .boxes {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Increased gap for larger boxes */
+        }
+
+        .box {
+            width: 250px; /* Larger square dimensions */
+            height: 250px; /* Keeping square */
+            position: relative;
+            text-decoration: none; /* Remove default link underline */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover; /* Image fills the box */
+            background-position: center;
+            background-color: white; /* White background if image fails */
+            border-radius: 8px;
+            overflow: hidden; /* Keep zoomed text within bounds */
+            transition: transform 0.3s ease; /* Smooth scaling for box */
+        }
+
+        /* Specific background images for each box */
+        .box-gp-c18 {
+            background-image: url('https://media.gettyimages.com/id/1254940380/photo/abstract-defocused-striped-background.webp?b=1&s=612x612&w=0&k=20&c=Euo2sX2dVGk43TjLPdP2FwaVj-YXephXIxt3M7KOJRE=');
+        }
+
+        .box-bio-c18 {
+            background-image: url('https://media.gettyimages.com/id/1351691256/photo/glitch-texture-overlay-static-noise-green-black.webp?b=1&s=612x612&w=0&k=20&c=dtxo8_E-KK1XR8dRCftWunwLFywIHgWDN-I-ZI9mWH8=');
+        }
+
+        .box-title {
+            color: white; /* White text for visibility */
+            font-size: 1.5em; /* Base font size */
+            font-weight: 600;
+            width: 90%; /* Slightly less than full width to prevent edge overflow */
+            text-align: center;
+            padding: 10px; /* Add padding to contain text */
+            transition: transform 0.3s ease; /* Smooth zoom for title */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); /* Stronger shadow for readability */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        /* Hover effect for the box */
+        .box:hover {
+            transform: scale(1.05); /* Slight zoom on the whole box */
+        }
+        /* Remove hover effect for the box */
+        .box:hover {
+            transform: none; /* No zoom on the whole box */
+        }
+        /* Hover effect for the title */
+        .box:hover .box-title {
+            transform: scale(1.1); /* Reduced from 1.2 to keep text in box */
+            color: white; /* Explicitly keep text white on hover */
+        }
+
+        /* Link styling */
+        .box:link, .box:visited {
+            color: white; /* Ensure text stays white */
+        }
+
+        .box:hover, .box:active {
+            color: white; /* Keep text white on hover and active states */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reversed Phase (Silica Matrix)</h1>
+        <div class="scenario">Suitable Scenario: Capable to Organic Contact, Strong Universality, High Resolution, Polishing</div>
+        <div class="boxes">
+            <a href="https://sepax-bio.com/all-products/ols/products/gp-c18" class="box box-gp-c18" target="_blank">
+                <span class="box-title">GP-C18</span>
+            </a>
+            <a href="https://sepax-bio.com/all-products/ols/products/bio-c18" class="box box-bio-c18" target="_blank">
+                <span class="box-title">Bio-C18</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
