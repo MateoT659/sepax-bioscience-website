@@ -1,44 +1,36 @@
+<!-- 
+ 
+LOCATION: 
+Inquire page, at the top of the page
+
+DESCRIPTION:
+This page displays the inquiry form and dynamically updates the text based on the URL parameters.
+The parameters come from the product page - specifically, Product Page/inquireButton.html
+
+MAINTANANCE:
+- No actions
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Display</title>
-<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
-<style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 0;
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            
-        }
-        .product-row {
-            display: flex;
-            justify-content: center;
-            flex-wrap: nowrap;
-            padding:2px;
-        }
-    </style>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
 </head>
-<body>
 
+<body>
     <p id="debugBox">
         code
     </p>
-
 </body>
+
 <script>
+    // Parse URL parameters
     const url = window.top.location.href;
-
-    // const url = 'https://sepax-bio.com/contact?productName="product name"&quantity=2&importance=high'
-
     const args = url.split(/[?&]/).slice(1)
-
     const argObj = {};
 
     args.forEach(arg => {
@@ -47,11 +39,8 @@
         argObj[key] = value;
     });
 
-    document.getElementById('debugBox').textContent = "{" + Object.entries(argObj).map(([key, value]) => `${key}: ${value}`).join(', ') + "}";
-
-
+    // Update the text content based on the URL parameters
     const productname = argObj.hasOwnProperty('productName') ? '(' + argObj.productName + ') ' : '';
-
     const body = `Make sure to mention your desired product ${productname}in your message.`;
 
     //I have become godaddy, destoyer of websites
@@ -61,5 +50,9 @@
 
     selected.textContent = body;
 
+    /**
+     * //For debugging: display the parsed URL parameters in the debug box.
+     * document.getElementById('debugBox').textContent = "{" + Object.entries(argObj).map(([key, value]) => `${key}: ${value}`).join(', ') + "}";
+     */
 </script>
 </html>

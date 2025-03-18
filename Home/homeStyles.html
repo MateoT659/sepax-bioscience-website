@@ -1,3 +1,21 @@
+<!-- 
+ 
+LOCATION: 
+Home screen, bottom of the page (1px wide section)
+
+DESCRIPTION:
+This page injects css classes into the home page to animate some of the text,
+change the color of the header logo depending on scroll position,
+fix the header height to be 100vh,
+and add a loading animation to the bottom of the page.
+
+MAINTANANCE:
+- No actions have to be taken whenever a new page is added.
+- When changing the styles, be sure to change the classes both 
+in the <style> tag and in the javascript.
+
+-->
+
 <!DOCTYPE html>
 <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>   
 <html lang="en">
@@ -66,7 +84,7 @@
         }
     }
     /* 
-    
+
     .fade-in-up-pre {
         opacity:0;
         transform: translateY(70px);
@@ -96,7 +114,8 @@
         100% {
             transform: translateY(0);
         }
-    } */
+    } 
+    */
 
 
    
@@ -127,11 +146,7 @@
     <div id = 'debug'><p>debug</p></div> -->
 </body>  
 <script>
-    const debug = false;
-    const doc = debug ? document : window.top.document;
-    
-
-
+    const doc = window.top.document;
 
     function applyStyle(element, style) {
         for (const key in style) {
@@ -157,13 +172,13 @@
         observerFadeIn.observe(element);
     }
 
+    // CSS Rules for fade-in and fade-in-up animations
     doc.styleSheets[0].insertRule('.fade-in-up-pre {opacity:0; transform: translateY(70px);}', 0);
     doc.styleSheets[0].insertRule('.fade-in-up {animation: fadeIn 2s, moveUp 2s;}', 0);
     doc.styleSheets[0].insertRule('.fade-in-pre {opacity:0;}', 0);
     doc.styleSheets[0].insertRule('.fade-in {animation: fadeIn 2s;}', 0);
     doc.styleSheets[0].insertRule('@keyframes fadeIn {0% {opacity: 0;} 10% {opacity: 0;} 75% {opacity: 1;}}', 0);
     doc.styleSheets[0].insertRule('@keyframes moveUp {0% {transform: translateY(70px);} 10% {transform: translateY(70px);} 100% {transform: translateY(0);}}', 0);
-
 
     const observerFadeIn = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -183,20 +198,12 @@
         });
     });
 
-    // const things = doc.querySelectorAll('label')
-    // things.forEach(thing => {
-    //     addFadeInUp(thing);
-    // });
-
-
-
-    // FIX HEADER HEIGHT
+    // Set Header Height to 100vh globally
     doc.querySelector('section[data-aid="HEADER_SECTION"]').style.height = '100vh';
     doc.querySelector('section[data-aid="HEADER_SECTION"]>div').style.height = '100vh';
     doc.querySelector('section[data-aid="HEADER_SECTION"]>div>div[role="img"]').style.height = '100vh';
 
-    // CHANGE HEADER IMAGE COLOR (SELECT ALL OF THEM THERE'S MORE THAN ONE FOR WHATEVER GOD FORSAKEN REASON)
-    
+    // Dynamically change header image color based on scroll position
     doc.styleSheets[0].insertRule('.white {filter: brightness(0) invert(1);}', 0);
     doc.styleSheets[0].insertRule('.color {filter: brightness(1);}', 0);
 
@@ -207,18 +214,19 @@
     });
 
     doc.addEventListener('scroll', () => {
+        // On scroll, check the position of the header logo and change its color accordingly. 
+        // Note that, when the image is at the top of the page, its maxHeight is 58px. 
         setTimeout(() => {
             const img = doc.querySelectorAll('img[data-aid="HEADER_LOGO_IMAGE_RENDERED"]');
-
             img.forEach(i => {
             if (i.style.maxHeight == '58px') {
-                //white when above the top
+                //Top of page: set to white
                 i.style.transition = 'filter 0.5s';
                 removeClass(i, 'color');
                 applyClass(i, 'white');
             }
             else {
-                //black when below the top
+                //Bottom of page: set to color
                 i.style.transition = 'filter 0.5s';
                 removeClass(i, 'white');
                 applyClass(i, 'color');
@@ -227,10 +235,11 @@
         }, 100); 
     });
 
-    //OPENING ANIMATION
-    
+    //Opening fade in and leading dot animation
     if(doc.getElementById('leading-dots-resin-clone') == null
     || window.top.href.includes('godaddy')) {
+        // For some reason, scripts run twice on the godaddy page 
+        // This if statement prevents the script from running twice on the same page.
         doc.styleSheets[0].insertRule('.leading-dots {color: #FFFFFF; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 5px;}', 0);
         doc.styleSheets[0].insertRule('.leading-dots span {aspect-ratio: 1/1; height:5px; width:5px; opacity: 0; background-color: #FFFFFF; animation: blink 3s infinite;}', 0);
         doc.styleSheets[0].insertRule('.leading-dots span:nth-child(0) {animation-delay: 2s;}', 0);
@@ -246,21 +255,21 @@
         doc.styleSheets[0].insertRule('@keyframes blink {0%, 50%, 100% {opacity: 0;} 30% {opacity: 1;}}', 0);
 
         const tagline = doc.querySelector('h1[data-aid="HEADER_TAGLINE_RENDERED"]');
-        
         const headerDiv = tagline.parentElement.parentElement.parentElement.parentElement.parentElement;
-        
         const child = document.getElementById('leading-dots-resin')
+    
         child.setAttribute('id', 'leading-dots-resin-clone');
+        child.style.position = 'absolute';
+        child.style.bottom = '20px';
         applyClass(tagline, 'fade-in-pre');
         applyClass(child, 'fade-in-pre');
-
+       
+        headerDiv.appendChild(child);
+ 
         setTimeout(() => {
             addFadeIn(tagline)
         }, 500);
 
-        child.style.position = 'absolute';
-        child.style.bottom = '20px';
-        headerDiv.appendChild(child);
         setTimeout(() => {
             addFadeIn(child)
         }, 1500);
