@@ -65,10 +65,14 @@ background-color: #eee;
 <script>
 function updateURL() {
 // remove the buy now button
-window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
+const buynowbtn = window.top.document.getElementById('buynow-btn');
+if(buynowbtn !== null){
+buynowbtn.parentNode.parentNode.style.display = 'none';
+}
 
 // move the description to the middle of the page
 const descOriginal = window.top.document.querySelector('div[data-aid="PRODUCT_DESCRIPTION_RENDERED"]');
+if (descOriginal !== null){
 const desc = descOriginal.cloneNode(true);
 
 if(descOriginal.style.display !== 'none'){
@@ -80,6 +84,15 @@ const parent = descOriginal.parentElement.parentElement.parentElement.parentElem
 parent.appendChild(desc);
 }
 }
+}
+
+window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
+price => {
+if(!price.hasAttribute('inquire') || (price.hasAttribute('inquire') && price.getAttribute('inquire') === "true")){
+price.parentNode.style.display = 'none';
+}
+}
+)
 
 // get the current URL
 const url = window.top.location.href;
@@ -90,7 +103,6 @@ return;
 }
 document.documentElement.style.setProperty('--currentURL', url);
 
- 
 // show/hide table based on URL
 const table = document.getElementById('specTable');
 if (url.includes('/products/') || url.includes('godaddy')) {

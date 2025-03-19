@@ -237,7 +237,7 @@ in the <style> tag and in the javascript.
 
     //Opening fade in and leading dot animation
     if(doc.getElementById('leading-dots-resin-clone') == null
-    || window.top.href.includes('godaddy')) {
+    || window.top.href?.includes('godaddy')) {
         // For some reason, scripts run twice on the godaddy page 
         // This if statement prevents the script from running twice on the same page.
         doc.styleSheets[0].insertRule('.leading-dots {color: #FFFFFF; font-weight: 700; display: flex; flex-direction: column; align-items: center; gap: 5px;}', 0);
