@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- 
  
 LOCATION: 
@@ -114,60 +115,260 @@ MAINTANANCE:
         <h1>Oligo Nucleotides</h1>
         <h2>Suitable Scenarios:</h2>
         <hr>
+=======
+<!-- Oligo Nucleotides Information
+This is the main page that displays the information about oligo nucleotides and their suitable scenarios.
+The page includes a list of suitable scenarios for oligo nucleotides, and each scenario is a clickable link that loads dynamic content.
+ The dynamic content is loaded based on the hash in the URL, and the content is fetched from separate HTML files.
+ The page also includes an image container that displays a landscape image on the right side of the page.-->
+>>>>>>> Stashed changes
 
-        <div class="subcategory">
-            <h2 onclick="toggleScenarios('strong-anion-exchange-high-resolution')">Strong Anion Exchange (High Resolution)<span class="chevron down">›</span></h2>
-            <ul id="strong-anion-exchange-high-resolution" class="scenarios" style="display: block;">
-                <li><a href="https://sepax-bio.com/ultra-high-resolution-ss" target="_top">Ultra High Resolution, Pressure and Alkali Resistance, High Recovery, High DBC</a></li>
-            </ul>
-        </div>
-        <hr>
-        <div class="subcategory">
-            <h2 onclick="toggleScenarios('strong-anion-exchange')">Strong Anion Exchange<span class="chevron down">›</span></h2>
-            <ul id="strong-anion-exchange" class="scenarios">
-                <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">High Resolution, High Recovery, Low Back Pressure</a></li>
-            </ul>
-        </div>
-        <hr>
-        <div class="subcategory">
-            <h2 onclick="toggleScenarios('reversed-phase-silica-matrix')">Reversed Phase (Silica Matrix)<span class="chevron">›</span></h2>
-            <ul id="reversed-phase-silica-matrix" class="scenarios">  
-                <li><a href=https://sepax-bio.com/reversed-phase-sm target="_top">Capable to Organic Contact, Strong Universality, High Resolution, Polishing</a></li>            
-            </ul>
-        </div>
-        <hr>
-        <div class="subcategory">
-            <h2 onclick="toggleScenarios('reversed-phase-polymer-matrix')">Reversed Phase (Polymer Matrix)<span class="chevron">›</span></h2>
-            <ul id="reversed-phase-polymer-matrix" class="scenarios">
-                <li><a href="https://sepax-bio.com/all-products/ols/products/polyrp" target="_top">Capable to Organic Contact, Resistant to High Aqueous Phase and Alkali, Polishing</a></li>        
-            </ul>
-        </div>
-        <hr>
-    </div>
-    <div class="image-container">
-        <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1763279599" alt="Landscape Image">
-    </div>
-
-    <script>
-        function toggleScenarios(id) {
-            const scenarios = document.getElementById(id);
-            const chevron = scenarios.previousElementSibling.querySelector('.chevron');
-
-            if (scenarios.style.display === "none" || scenarios.style.display === "") {
-                // Hide all scenario lists except the first one
-                document.querySelectorAll(".scenarios").forEach((el, index) => {
-                    el.style.display = "none";
-                });
-                document.querySelectorAll(".chevron").forEach((el, index) => {
-                    el.classList.remove('down');
-                });
-                scenarios.style.display = "block";
-                chevron.classList.add('down');
-            } else {
-                scenarios.style.display = "none";
-                chevron.classList.remove('down');
-            }
-        }
-    </script>
-</body>
-</html>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Oligo Nucleotides Information</title>
+     <style>
+         :root {
+             --lightColor: rgb(30, 80, 130);
+             --primaryColor: rgb(30, 80, 130); /* Match dynamic content */
+         }
+         body {
+             display: flex;
+             margin: 0;
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         }
+         .content {
+             flex: 1;
+             padding: 20px;
+             max-width: 70%;
+             overflow-y: auto;
+         }
+         #content-area {
+             padding: 20px;
+             max-width: 1000px;
+             margin: 20px auto;
+         }
+         .image-container {
+             position: sticky;
+             top: 0;
+             right: 0;
+             width: 50%; 
+             height: 600px;
+             overflow: hidden;
+             pointer-events: none; 
+         }
+         .image-container img {
+             max-height: 100%;
+         }
+         h1, h2 {
+             margin-top: 0;
+             margin-bottom: 30px;
+             font-weight: 700;
+             color: var(--lightColor);
+         }
+         h3 {
+             margin-top: 0;
+             margin-bottom: 10px;
+             font-weight: 400;
+         }
+         .subcategory {
+             margin-bottom: 20px;
+         }
+         .subcategory h2 {
+             cursor: pointer;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             font-weight: 400;
+             color: var(--lightColor);
+         }
+         .scenarios {
+             display: none;
+             list-style: none;
+             padding-left: 20px;
+         }
+         .scenarios a {
+             text-decoration: none;
+             color: var(--lightColor);
+             font-style: italic;
+             transition: color 0.3s ease;
+         }
+         .scenarios a:hover {
+             color: #ff4500;
+             text-decoration: underline;
+         }
+         .scenarios li {
+             white-space: normal; 
+             word-break: break-word;
+             margin-bottom: 10px;
+             padding-left: 12px;
+             border-left: 2px solid var(--lightColor);
+         }
+         hr {
+             border: none;
+             border-top: 1px solid lightgray;
+             margin: 10px 0;
+         }
+         .chevron {
+             transition: transform 0.2s;
+             -webkit-user-select: none; /* Safari */        
+             -moz-user-select: none; /* Firefox */
+             -ms-user-select: none; /* IE10+/Edge */
+             user-select: none; /* Standard */
+             color: gray;
+         }
+         .chevron.down {
+             transform: rotate(90deg);
+         }
+         /* Styles for dynamic content */
+         .container {
+             text-align: center;
+         }
+         .scenario {
+             font-size: 1.2em;
+             color: #333;
+             margin-bottom: 30px;
+             font-style: italic;
+         }
+         .boxes {
+             display: flex;
+             justify-content: center;
+             gap: 30px;
+         }
+         .box {
+             width: 250px;
+             height: 250px;
+             position: relative;
+             text-decoration: none;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             background-size: cover;
+             background-position: center;
+             background-color: white;
+             border-radius: 8px;
+             overflow: hidden;
+             transition: transform 0.3s ease;
+         }
+         .box:hover {
+             transform: scale(1.05);
+         }
+         .box-title {
+             color: white;
+             font-size: 1.5em;
+             font-weight: 600;
+             width: 90%;
+             text-align: center;
+             padding: 10px;
+             transition: transform 0.3s ease;
+             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+             box-sizing: border-box;
+         }
+         .box:hover .box-title {
+             transform: scale(1.1);
+             color: white;
+         }
+         .box:link, .box:visited, .box:hover, .box:active {
+             color: white;
+         }
+     </style>
+ </head>
+ <body>
+     <div class="content">
+         <h1>Oligo Nucleotides</h1>
+         <h2>Suitable Scenarios:</h2>
+         <hr>
+ 
+         <div class="subcategory">
+             <h2 onclick="toggleScenarios('strong-anion-exchange-high-resolution')">Strong Anion Exchange (High Resolution)<span class="chevron down">›</span></h2>
+             <ul id="strong-anion-exchange-high-resolution" class="scenarios" style="display: block;">
+                 <li><a href="#ultra-high-resolution-ss">Ultra High Resolution, Pressure and Alkali Resistance, High Recovery, High DBC</a></li>
+             </ul>
+         </div>
+         <hr>
+         <div class="subcategory">
+             <h2 onclick="toggleScenarios('strong-anion-exchange')">Strong Anion Exchange<span class="chevron">›</span></h2>
+             <ul id="strong-anion-exchange" class="scenarios">
+                 <li><a href="https://sepax-bio.com/all-products/ols/products/monomix-mab60-q" target="_top">High Resolution, High Recovery, Low Back Pressure</a></li>
+             </ul>
+         </div>
+         <hr>
+         <div class="subcategory">
+             <h2 onclick="toggleScenarios('reversed-phase-silica-matrix')">Reversed Phase (Silica Matrix)<span class="chevron">›</span></h2>
+             <ul id="reversed-phase-silica-matrix" class="scenarios">  
+                 <li><a href="#reversed-phase-sm">Capable to Organic Contact, Strong Universality, High Resolution, Polishing</a></li>            
+             </ul>
+         </div>
+         <hr>
+         <div class="subcategory">
+             <h2 onclick="toggleScenarios('reversed-phase-polymer-matrix')">Reversed Phase (Polymer Matrix)<span class="chevron">›</span></h2>
+             <ul id="reversed-phase-polymer-matrix" class="scenarios">
+                 <li><a href="https://sepax-bio.com/all-products/ols/products/polyrp" target="_top">Capable to Organic Contact, Resistant to High Aqueous Phase and Alkali, Polishing</a></li>        
+             </ul>
+         </div>
+         <hr>
+     </div>
+     <div class="image-container">
+         <img id="main-image" src="https://img1.wsimg.com/isteam/getty/1763279599" alt="Landscape Image">
+     </div>
+     <div id="content-area">
+         <!-- Dynamic content will be loaded here -->
+     </div>
+ 
+     <script>
+         function toggleScenarios(id) {
+             const scenarios = document.getElementById(id);
+             const chevron = scenarios.previousElementSibling.querySelector('.chevron');
+             if (scenarios.style.display === "none" || scenarios.style.display === "") {
+                 document.querySelectorAll(".scenarios").forEach(el => el.style.display = "none");
+                 document.querySelectorAll(".chevron").forEach(el => el.classList.remove('down'));
+                 scenarios.style.display = "block";
+                 chevron.classList.add('down');
+             } else {
+                 scenarios.style.display = "none";
+                 chevron.classList.remove('down');
+             }
+         }
+ 
+         window.addEventListener('hashchange', loadContentBasedOnHash);
+ 
+         function loadContentBasedOnHash() {
+             const hash = window.location.hash.substring(1) || 'default';
+             let contentUrl;
+             switch (hash) {
+                 case 'ultra-high-resolution-ss':
+                     contentUrl = 'ultra-high-resolution-ss.html';
+                     break;
+                 case 'reversed-phase-sm':
+                     contentUrl = 'reversed-phase-sm.html';
+                     break;
+                 default:
+                     contentUrl = null;
+                    //  document.getElementById('content-area').innerHTML = '<p>Please select a scenario.</p>';
+                     return;
+             }
+             fetch(contentUrl)
+                 .then(response => response.text())
+                 .then(html => {
+                     const parser = new DOMParser();
+                     const doc = parser.parseFromString(html, 'text/html');
+                     const content = doc.querySelector('.container').innerHTML;
+                     document.getElementById('content-area').innerHTML = content;
+                 })
+                 .catch(error => {
+                     console.error('Error loading content:', error);
+                     document.getElementById('content-area').innerHTML = '<p>Error loading content.</p>';
+                 });
+         }
+ 
+         // Load content on initial page load if there's a hash
+         if (window.location.hash) {
+             loadContentBasedOnHash();
+         } else {
+            //  document.getElementById('content-area').innerHTML = '<p>Please select a scenario.</p>';
+         }
+     </script>
+ </body>
+ </html>
