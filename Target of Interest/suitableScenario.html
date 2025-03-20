@@ -1,0 +1,257 @@
+<!-- 
+ 
+LOCATION: 
+Its own page, called suitableScenario
+
+DESCRIPTION:
+This page dynamically changes based on the suitable scenario chosen from the previous target of interest page (query parameter).
+It will display the suitable scenario and the products that are suitable for that scenario- With two or more options for the same scenario.
+
+MAINTENANCE:
+- To add a new category or product, copy one of the existing blocks in scenarioContents and update the href, product name, and product number.
+- Ensure that the <a> tag has the target="_blank" attribute so it opens in a new tab (updated from "_top" since "_blank" aligns with your examples).
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suitable Scenario</title>
+    <style>
+        :root {
+            --primaryColor: rgb(30, 80, 130); /* Default color */
+            --hoverColor: #ff4500;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primaryColor);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .scenario {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .boxes {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .box {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .box-title {
+            color: white;
+            font-size: 1.5em;
+            font-weight: 600;
+            width: 90%;
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+            box-sizing: border-box;
+        }
+
+        .box:hover .box-title {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .box:link, .box:visited, .box:hover, .box:active {
+            color: white;
+        }
+
+        /* Specific box styles & Images */
+        .box-proteomix-por15 {
+            background-image: url('https://media.gettyimages.com/id/1733671277/photo/curved-data-lines-with-shallow-depth-of-field-blue-technology-computer-network-abstract.webp?b=1&s=612x612&w=0&k=20&c=hOz-wdfU03KcMwSvJ_kQn_vKdMfJnlZiRP52EWQU2p4=');
+        }
+
+        .box-proteomix-por30 {
+            background-image: url('https://media.gettyimages.com/id/1758004093/photo/abstract-network-of-fictitious-digital-particles.webp?b=1&s=612x612&w=0&k=20&c=ufSs0LU9b6ihBs-l-Y4a7-eVkJl9RUZZSuDQKEmOyDw=');
+        }
+
+        .box-gp-c18 {
+            background-image: url('https://media.gettyimages.com/id/1254940380/photo/abstract-defocused-striped-background.webp?b=1&s=612x612&w=0&k=20&c=Euo2sX2dVGk43TjLPdP2FwaVj-YXephXIxt3M7KOJRE=');
+        }
+
+        .box-bio-c18 {
+            background-image: url('https://media.gettyimages.com/id/1351691256/photo/glitch-texture-overlay-static-noise-green-black.webp?b=1&s=612x612&w=0&k=20&c=dtxo8_E-KK1XR8dRCftWunwLFywIHgWDN-I-ZI9mWH8=');
+        }
+        .box-proteomix-por15-q {
+            background-image: url('https://media.gettyimages.com/id/1079398170/photo/black-digital-abstract-background-with-wave-orange-pink-purple-particles-glow-sparkles-and.webp?b=1&s=612x612&w=0&k=20&c=oWHoGhcjOoYmFAG2jaV08pxp461ZMzrSeuzOvHHGzik=');
+        }
+        .box-proteomix-por30-q {
+            background-image: url('https://media.gettyimages.com/id/1401167123/photo/fiber-optic-purple-light-source-abstract-background.webp?b=1&s=612x612&w=0&k=20&c=A8jkXrPm8dHwxrqFWnNEv6ydvIZVGvLJR18HIlfX6Xw=');
+        }
+        .box-hi-monomix {
+            background-image: url('https://media.gettyimages.com/id/1716225558/photo/abstract-yellow-orange-energy-waves-from-futuristic-hi-tech-particles-glowing-background.webp?b=1&s=612x612&w=0&k=20&c=M7XyFItAl4aypJnubpLK-A1zPv169ocQJiXHfuv-EnM=');
+        }
+        .box-hi-polar {
+            background-image: url('https://media.gettyimages.com/id/1341631826/photo/swirly-particles-multi-colored-glitter-background.webp?b=1&s=612x612&w=0&k=20&c=_lpDauGnTwefYR3hGX_x9Jq74RSQ_FNjpfkUR5-vXz8=');
+        }
+        .box-plasmid-generik {
+            background-image: url('https://media.gettyimages.com/id/684402944/photo/highly-detailed-image-of-grunge-vintage-wallpaper-background.webp?b=1&s=612x612&w=0&k=20&c=aAOZtJk7mp-x8X5ReqVICm3T3Ap8FLoRAI8uZX5k9z4=');
+        }
+
+        .box-plasmid-monomix {
+            background-image: url('https://media.gettyimages.com/id/1807333680/photo/inspired-wallpaper-frame-for-a-unique-touch-gritty-meets-contemporary.webp?b=1&s=612x612&w=0&k=20&c=Ka9nHcpJn6Wfb3ip11ZOIqYFEKo3N0b4HrxopjpE2IQ=');
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content"></div>
+    </div>
+
+    <script>
+        // Function to get query parameter from parent or fallback
+        function getScenarioParam() {
+            // First, try the iframe's own URL (unlikely to work with srcDoc)
+            const iframeParams = new URLSearchParams(window.location.search);
+            let scenario = iframeParams.get('scenario');
+    
+            // If null, try getting from the parent window
+            if (!scenario && window.parent) {
+                const parentParams = new URLSearchParams(window.parent.location.search);
+                scenario = parentParams.get('scenario');
+            }
+    
+            console.log('Scenario from URL:', scenario); // Debug output
+            return scenario;
+        }
+
+        const scenarioContents = {
+            "oligo-anion-exchange": `
+                <h1>Strong Anion Exchange High Resolution</h1>
+                <div class="scenario">Suitable Scenario: Ultra High Resolution, Pressure and Alkali Resistance, High Recovery, High DBC</div>
+                  <br>
+                  <br>
+                <div class="boxes">
+                    <a href="https://sepax-bio.com/all-products/ols/products/proteomix-por15-mq" class="box box-proteomix-por15" target="_top">
+                        <span class="box-title">Proteomix POR15-MQ</span>
+                    </a>
+                    <a href="https://sepax-bio.com/all-products/ols/products/proteomix-por30-mq" class="box box-proteomix-por30" target="_top">
+                        <span class="box-title">Proteomix POR30-MQ</span>
+                    </a>
+                </div>
+            `,
+            "oligo-reversed-phase": `
+                <h1>Reversed Phase (Silica Matrix)</h1>
+                <div class="scenario">Suitable Scenario: Capable to Organic Contact, Strong Universality, High Resolution, Polishing</div>
+                <br>
+                <br>
+                <div class="boxes">
+                    <a href="https://sepax-bio.com/all-products/ols/products/gp-c18" class="box box-gp-c18" target="_top">
+                        <span class="box-title">GP-C18</span>
+                    </a>
+                    <a href="https://sepax-bio.com/all-products/ols/products/bio-c18" class="box box-bio-c18" target="_top">
+                        <span class="box-title">Bio-C18</span>
+                    </a>
+                </div>
+            `,
+            "aav-anion-exchange": `
+             <h1>Strong Anion Exchange High Resolution</h1>
+        <div class="scenario">Suitable Scenario: AAV polishing, Seperation for Empty/Solid Capsids</div>
+        <br>
+                  <br>
+        <div class="boxes">
+            <a href="https://sepax-bio.com/all-products/ols/products/proteomix-por15-q" class="box box-proteomix-por15-q" target="_top">
+                <span class="box-title">Proteomix POR15-Q</span>
+            </a>
+            <a href="https://sepax-bio.com/all-products/ols/products/proteomix-por30-q" class="box box-proteomix-por30-q" target="_top">
+                <span class="box-title">Proteomix POR30-Q</span>
+                </a>
+            </div>
+            `,
+            "antibody-hydrophobic-interaction":`
+        <h1>Hydrophobic Interaction</h1>
+        <div class="scenario">Suitable Scenario: Bispecific antibody, Polyclonal Antibody, Fc Fusion Protein</div>
+        <br>
+                  <br>
+        <div class="boxes">
+            <a href="https://sepax-bio.com/all-products/ols/products/monomix-mc60-hic-phenyl" class="box box-hi-monomix" target="_top">
+                <span class="box-title">Monomix MC60-HIC Phenyl</span>
+            </a>
+            <a href="https://sepax-bio.com/all-products/ols/products/polar-mc60-hic-phenyl" class="box box-hi-polar" target="_top">
+                <span class="box-title">Polar MC60-HIC Phenyl</span>
+            </a>
+        </div>
+        `,
+        "plasmid-hi":`
+        <h1>Plasmid</h1>
+        <div class="scenario">Suitable Scenario: Polishing, Remove Linearized and Nicked Plasmid</div>
+        <br>
+                  <br>
+        <div class="boxes">
+            <a href="https://sepax-bio.com/all-products/ols/products/generik-mc30-hic-butyl" class="box box-plasmid-generik" target="_top">
+                <span class="box-title">Generik MC30-HIC Butyl</span>
+            </a>
+            <a href="https://sepax-bio.com/all-products/ols/products/monomix-mc30-hic-butyl" class="box box-plasmid-monomix" target="_top">
+                <span class="box-title">Monomix MC30-HIC Butyl</span>
+            </a>
+        </div>
+        `
+
+        };
+    
+        // Define primary colors for each scenario with "oligo-" prefix
+        const primaryColors = {
+            "oligo-anion-exchange": "rgb(30, 80, 130)", // Blue
+            "oligo-reversed-phase": "rgb(0, 128, 128)",  // Teal
+            "aav-anion-exchange": "rgb(150, 5, 1000)", // Blueish purple
+            "antibody-hydropobic-interaction": "rgb(173, 216, 230)", // Pastel blue
+            "plasmid-hi": "rgb(100, 149, 237)" // Cornflower blue, slightly darker
+        };
+    
+        // Get the scenario
+        const scenario = getScenarioParam();
+    
+        // Get the content container
+        const contentDiv = document.getElementById('content');
+    
+        // Load content and set primary color based on scenario
+        if (scenario && scenarioContents[scenario]) {
+            contentDiv.innerHTML = scenarioContents[scenario];
+            if (primaryColors[scenario]) {
+                document.documentElement.style.setProperty('--primaryColor', primaryColors[scenario]);
+            }
+        } else {
+            contentDiv.innerHTML = '<p>Scenario not found. URL parameter: "' + (scenario || 'none') + '"</p>';
+        }
+    </script>
+</body>
+</html>
