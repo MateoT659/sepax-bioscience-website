@@ -45,6 +45,10 @@ MAINTANANCE:
     }
 
     window.top.document.addEventListener('click', ()=>{
+        update();
+    });
+
+    function update(){
         //runs whenever the page is clicked
         
         // hide the description box on update
@@ -53,7 +57,10 @@ MAINTANANCE:
             desc.style.display = 'none';
         }
         // hide the buy now button on update
-        window.top.document.getElementById('buynow-btn').parentNode.parentNode.style.display = 'none';
+        const buynow = window.top.document.getElementById('buynow-btn');
+        if (buynow !== null){
+            buynow.parentNode.parentNode.style.display = 'none';
+        }
 
 
         //find all sizeboxes
@@ -99,6 +106,7 @@ MAINTANANCE:
             window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
                 price => {
                     price.parentNode.style.display = 'block';
+                    price.setAttribute('inquire', 'false');
                 }
             )
         } else {
@@ -108,10 +116,12 @@ MAINTANANCE:
             window.top.document.querySelectorAll('div[data-aid="PRODUCT_PRICE_RENDERED"]').forEach(
                 price => {
                     price.parentNode.style.display = 'none';
+                    price.setAttribute('inquire', 'true');
+
                 }
             )
         }
-    });
+    }
 
 </script>
 
