@@ -79,9 +79,13 @@ MAINTANANCE:
         }
         .scenarios a {
             text-decoration: none;
-            color: rgb(71, 71, 71);
+            color: var(--lightColor); /* Changed to your blue-ish color */
             font-style: italic;
-            text-decoration: underline;
+            transition: color 0.3s ease; /* Smooth transition for hover */
+        }
+        .scenarios a:hover {
+            color: #ff4500; /* Orange-red on hover */
+            text-decoration: underline; /* Underline on hover */
         }
         .scenarios li {
             white-space: normal; 
@@ -112,7 +116,7 @@ MAINTANANCE:
 <body>
     <div class="content">
         <h1>Antibody</h1>
-	<h2>Suitable Scenarios:</h2>
+	    <h2>Suitable Scenarios:</h2>
         <hr>
 
         <div class="subcategory">
